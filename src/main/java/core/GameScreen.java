@@ -32,15 +32,16 @@ public class GameScreen extends JPanel {
         super.paintComponent(g);
 
 
-//        for (int y = 0; y < 20; y++) {
-//            for (int x = 0; x < 20; x++) {
-//
-//
-//            }
-//        }
+        for (int y = 0; y < 20; y++) {
+            for (int x = 0; x < 20; x++) {
+                g.drawImage(sprites.get(getRandomInt()), x * 32, y * 32, null);
+            }
+        }
     }
 
-
+    private int getRandomInt() {
+        return random.nextInt(100);
+    }
 
     private Color getRandomColor() {
         int r = random.nextInt(256);
