@@ -15,8 +15,10 @@ public class GameScreen extends JPanel {
 
     private ArrayList<BufferedImage> sprites = new ArrayList<>();
 
+
     public GameScreen(BufferedImage img) {
         this.img = img;
+
         random = new Random();
         loadSprites();
     }
@@ -33,20 +35,22 @@ public class GameScreen extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-
         for (int y = 0; y < 20; y++) {
             for (int x = 0; x < 20; x++) {
                 g.drawImage(sprites.get(getRandomInt()), x * 32, y * 32, null);
             }
         }
 
+        callFPS();
+    }
+
+    private void callFPS() {
         frames++;
         if (System.currentTimeMillis() - lastTime >= 1000) {
             System.out.println("FPS: " + frames);
             frames = 0;
             lastTime = System.currentTimeMillis();
         }
-        repaint();
     }
 
     private int getRandomInt() {
