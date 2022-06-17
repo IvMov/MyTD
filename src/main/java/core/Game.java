@@ -15,9 +15,16 @@ public class Game extends JFrame {
     private double timePerFrame;
     private long lastFrame;
 
+    private double timePerUpdate;
+    private long lastUpdate;
+
+    private int updates;
+    private long lastTimeUPS;
+
     public Game() {
 
-        timePerFrame = 1000000000.0 / 60;
+        timePerFrame = 1000000000.0 / 120;
+        timePerUpdate = 1000000000.0 / 60;
 
         importImg();
 
@@ -41,14 +48,34 @@ public class Game extends JFrame {
 
     private void loopGame() {
         while (true) {
+            if (System.nanoTime() - lastUpdate >= timePerUpdate) {
+                updateGame();
+                callUPS();
+            } else {
+                //do nothing
+            }
+
             if (System.nanoTime() - lastFrame >= timePerFrame) {
                 lastFrame = System.nanoTime();
                 repaint();
             } else {
-                //nothing
+                //do nothing
             }
         }
 
+    }
+
+    private void callUPS() {
+        if (System.currentTimeMillis() - lastTimeUPS >= 1000) {
+            System.out.println("UPS: " + updates);
+            updates = 0;
+            lastTimeUPS = System.currentTimeMillis();
+        }
+    }
+
+    private void updateGame() {
+        updates++;
+        lastUpdate = System.nanoTime();
     }
 
     public static void main(String[] args) {
