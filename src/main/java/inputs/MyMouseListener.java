@@ -1,14 +1,22 @@
 package inputs;
 
+import core.Game;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class MyMouseListener implements MouseListener, MouseMotionListener {
 
+    private Game game;
+
+    public MyMouseListener(Game game) {
+        this.game = game;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getButton() == MouseEvent.BUTTON1){
+        if (e.getButton() == MouseEvent.BUTTON1) {
             System.out.println("Mouse Pos:" + e.getX() + " : " + e.getY());
         }
     }

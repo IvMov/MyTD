@@ -16,9 +16,6 @@ public class Game extends JFrame implements Runnable {
     private GameScreen gameScreen;
     private Thread gameThread;
 
-    private MyMouseListener myMouseListener;
-    private KeyboardListener keyboardListener;
-
     //Classes
     private Render render;
     private Menu menu;
@@ -27,7 +24,6 @@ public class Game extends JFrame implements Runnable {
 
 
     public Game() {
-        initInputs();
         initClasses();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -46,17 +42,6 @@ public class Game extends JFrame implements Runnable {
         settings = new Settings(this);
     }
 
-    private void initInputs() {
-        myMouseListener = new MyMouseListener();
-        keyboardListener = new KeyboardListener();
-
-        addMouseListener(myMouseListener);
-        addMouseMotionListener(myMouseListener);
-        addKeyListener(keyboardListener);
-
-        requestFocus();
-    }
-
     private void start() { //for me - method to create new Thread and start it
         gameThread = new Thread(this) {
         };
@@ -66,6 +51,7 @@ public class Game extends JFrame implements Runnable {
     public static void main(String[] args) {
         System.out.println("Start of game");
         Game game = new Game();
+        game.gameScreen.initInputs();
         game.start();
     }
 
