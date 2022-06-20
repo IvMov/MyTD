@@ -9,11 +9,8 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getButton() == MouseEvent.BUTTON1){
-            System.out.println("left click!");
-        } else{
-            System.out.println(e.getButton());
+            System.out.println("Mouse Pos:" + e.getX() + " : " + e.getY());
         }
-
     }
 
     @Override
