@@ -11,14 +11,17 @@ public class GameScreen extends JPanel {
     private Random random;
     private BufferedImage img;
 
+    private Dimension size;
+
     private ArrayList<BufferedImage> sprites = new ArrayList<>();
 
 
     public GameScreen(BufferedImage img) {
         this.img = img;
 
-        random = new Random();
+        setPanelSize();
         loadSprites();
+        random = new Random();
     }
 
     private void loadSprites() {
@@ -38,6 +41,13 @@ public class GameScreen extends JPanel {
                 g.drawImage(sprites.get(getRandomInt()), x * 32, y * 32, null);
             }
         }
+    }
+
+    private void setPanelSize() {
+        size = new Dimension(640, 640);
+        setMinimumSize(size);
+        setPreferredSize(size);
+        setMaximumSize(size);
     }
 
     private int getRandomInt() {

@@ -20,12 +20,12 @@ public class Game extends JFrame implements Runnable {
 
         importImg();
 
-        setSize(640, 640);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         gameScreen = new GameScreen(img);
         add(gameScreen);
         setVisible(true);
+        pack();
     }
 
     private void importImg() {
@@ -59,22 +59,25 @@ public class Game extends JFrame implements Runnable {
         int frames = 0;
         int updates = 0;
 
-        long lastFrame = System.nanoTime();
-        long lastUpdate = System.nanoTime();
         long lastTimeCheck = System.currentTimeMillis();
 
+        long lastUpdate = System.nanoTime();
+        long lastFrame = System.nanoTime();
+        long now;
+
         while (true) {
+            now = System.nanoTime();
 
             //render
-            if (System.nanoTime() - lastFrame >= timePerFrame) {
+            if (now - lastFrame >= timePerFrame) {
                 repaint();
-                lastFrame = System.nanoTime();
+                lastFrame = now;
                 frames++;
             }
 
             //update
-            if (System.nanoTime() - lastUpdate >= timePerUpdate) {
-                lastUpdate = System.nanoTime();
+            if (now - lastUpdate >= timePerUpdate) {
+                lastUpdate = now;
                 updates++;
             }
 
