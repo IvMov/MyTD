@@ -28,12 +28,10 @@ public class Game extends JFrame implements Runnable {
 
     public Game() {
 
-        initInputs();
-
-
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        initInputs();
         initClasses();
 
         add(gameScreen);
