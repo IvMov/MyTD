@@ -3,11 +3,7 @@ package core;
 import inputs.KeyboardListener;
 import inputs.MyMouseListener;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class Game extends JFrame implements Runnable {
 
@@ -15,7 +11,6 @@ public class Game extends JFrame implements Runnable {
     private static final int UPS_SET = 60;
 
     private GameScreen gameScreen;
-    private BufferedImage img;
     private Thread gameThread;
 
     private MyMouseListener myMouseListener;
@@ -23,13 +18,11 @@ public class Game extends JFrame implements Runnable {
 
     public Game() {
 
-        importImg();
-
         initInputs();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        gameScreen = new GameScreen(img);
+        gameScreen = new GameScreen(this);
         add(gameScreen);
         setVisible(true);
         pack();
@@ -44,16 +37,6 @@ public class Game extends JFrame implements Runnable {
         addKeyListener(keyboardListener);
 
         requestFocus();
-    }
-
-    private void importImg() {
-        InputStream is = getClass().getResourceAsStream("/spriteatlas.png");
-
-        try {
-            img = ImageIO.read(is);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void start() { //for me - method to create new Thread and start it
