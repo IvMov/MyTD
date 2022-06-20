@@ -1,5 +1,8 @@
 package core;
 
+import inputs.KeyboardListener;
+import inputs.MyMouseListener;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
@@ -11,14 +14,18 @@ public class Game extends JFrame implements Runnable {
     private static final int FPS_SET = 120;
     private static final int UPS_SET = 60;
 
-
     private GameScreen gameScreen;
     private BufferedImage img;
     private Thread gameThread;
 
+    private MyMouseListener myMouseListener;
+    private KeyboardListener keyboardListener;
+
     public Game() {
 
         importImg();
+
+        initInputs();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -26,6 +33,17 @@ public class Game extends JFrame implements Runnable {
         add(gameScreen);
         setVisible(true);
         pack();
+    }
+
+    private void initInputs() {
+        myMouseListener = new MyMouseListener();
+        keyboardListener = new KeyboardListener();
+
+        addMouseListener(myMouseListener);
+        addMouseMotionListener(myMouseListener);
+        addKeyListener(keyboardListener);
+
+        requestFocus();
     }
 
     private void importImg() {
