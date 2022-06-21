@@ -6,6 +6,8 @@ public class MyButton {
 
     private int x, y, width, height;
     private String text;
+    private boolean mouseOver;
+    private boolean mousePressed;
 
     private Rectangle bounds;
 
@@ -15,6 +17,7 @@ public class MyButton {
         this.width = width;
         this.height = height;
         this.text = text;
+        initBounds();
 
     }
 
@@ -24,16 +27,42 @@ public class MyButton {
 
     public void draw(Graphics g) {
         //body
-        g.setColor(Color.white);
-        g.fillRect(x, y, width, height);
+        drawBody(g);
 
         //border
-        g.setColor(Color.black);
-        g.drawRect(x, y, width, height);
+        drawBodrder(g);
+
 
         //text
         drawText(g);
 
+    }
+
+    public void resetBooleans(){
+        this.mouseOver = false;
+        this.mousePressed = false;
+    }
+
+    private void drawBodrder(Graphics g) {
+        if (mousePressed) {
+            g.setColor(Color.black);
+            g.drawRect(x + 1, y + 1, width - 2, height - 2);
+            g.drawRect(x + 2, y + 2, width - 4, height - 4);
+        } else {
+            g.setColor(Color.black);
+            g.drawRect(x, y, width, height);
+        }
+
+    }
+
+    private void drawBody(Graphics g) {
+        if (mouseOver) {
+            g.setColor(Color.gray);
+        } else {
+            g.setColor(Color.white);
+        }
+
+        g.fillRect(x, y, width, height);
     }
 
     private void drawText(Graphics g) {
@@ -42,7 +71,16 @@ public class MyButton {
         g.drawString(text, x + width / 2 - w / 2, y + h / 2 + height / 2);
     }
 
+
     public Rectangle getBounds() {
         return bounds;
+    }
+
+    public void setMousePressed(boolean mousePressed) {
+        this.mousePressed = mousePressed;
+    }
+
+    public void setMouseOver(boolean mouseOver) {
+        this.mouseOver = mouseOver;
     }
 }
