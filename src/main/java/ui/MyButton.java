@@ -4,6 +4,7 @@ import java.awt.*;
 
 public class MyButton {
 
+    private int id;
     private int x, y, width, height;
     private String text;
     private boolean mouseOver;
@@ -11,14 +12,31 @@ public class MyButton {
 
     private Rectangle bounds;
 
+    //constructor for common buttons
     public MyButton(int x, int y, int width, int height, String text) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.text = text;
+        this.id = -1; //its for (when loop - to except nullpointer - interesting)
         initBounds();
+    }
 
+    //constructor for buttons with id (tile buttons)
+    public MyButton(int id,
+                    int x,
+                    int y,
+                    int width,
+                    int height,
+                    String text) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.text = text;
+        initBounds();
     }
 
     private void initBounds() {
@@ -38,7 +56,7 @@ public class MyButton {
 
     }
 
-    public void resetBooleans(){
+    public void resetBooleans() {
         this.mouseOver = false;
         this.mousePressed = false;
     }
@@ -82,5 +100,9 @@ public class MyButton {
 
     public void setMouseOver(boolean mouseOver) {
         this.mouseOver = mouseOver;
+    }
+
+    public int getId() {
+        return id;
     }
 }

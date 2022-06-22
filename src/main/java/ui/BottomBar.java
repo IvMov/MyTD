@@ -5,6 +5,7 @@ import objects.Tile;
 import scenes.Playing;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class BottomBar {
@@ -33,9 +34,10 @@ public class BottomBar {
         int width = 40;
         int height = 40;
         int xOffset = (int) (width * 1.1f);
+        int i = 0;
 
         for (Tile tile : playing.getTileManager().tiles) {
-            tileButtons.add(new MyButton(xPosition, yPosition, width, height, tile.getName()));
+            tileButtons.add(new MyButton(i++ ,xPosition, yPosition, width, height, tile.getName()));
             xPosition = xPosition + xOffset;
         }
     }
@@ -48,9 +50,7 @@ public class BottomBar {
 
     public void drawButtons(Graphics g) {
         bMenu.draw(g);
-        for (MyButton b : tileButtons) {
-            b.draw(g);
-        }
+        drawTileButtons(g);
     }
 
     public void mouseClicked(int x, int y) {
@@ -69,6 +69,22 @@ public class BottomBar {
 
     public void mouseReleased(int x, int y) {
         bMenu.resetBooleans();
+    }
+
+    private void drawTileButtons(Graphics g) {
+        for (MyButton b : tileButtons) {
+            g.drawImage(getButtImg(b.getId()),
+                    (int) b.getBounds().getX(),
+                    (int) b.getBounds().getY(),
+                    (int) b.getBounds().getWidth(),
+                    (int) b.getBounds().getHeight(),
+                    null);
+        }
+    }
+
+    public BufferedImage getButtImg(int id) {
+        return playing.getTileManager().getSprite(id);
+
     }
 }
 
