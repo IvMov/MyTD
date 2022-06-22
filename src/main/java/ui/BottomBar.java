@@ -37,7 +37,7 @@ public class BottomBar {
         int i = 0;
 
         for (Tile tile : playing.getTileManager().tiles) {
-            tileButtons.add(new MyButton(i++ ,xPosition, yPosition, width, height, tile.getName()));
+            tileButtons.add(new MyButton(i++, xPosition, yPosition, width, height, tile.getName()));
             xPosition = xPosition + xOffset;
         }
     }
@@ -61,24 +61,61 @@ public class BottomBar {
 
     public void mouseMoved(int x, int y) {
         bMenu.setMouseOver(bMenu.getBounds().contains(x, y));
+
+        for (MyButton b : tileButtons) {
+            b.setMouseOver(b.getBounds().contains(x, y));
+        }
     }
 
     public void mousePressed(int x, int y) {
         bMenu.setMousePressed(bMenu.getBounds().contains(x, y));
+        for (MyButton b : tileButtons) {
+            b.setMousePressed(b.getBounds().contains(x, y));
+        }
     }
 
     public void mouseReleased(int x, int y) {
         bMenu.resetBooleans();
+        for (MyButton b : tileButtons) {
+            b.resetBooleans();
+        }
+
     }
 
     private void drawTileButtons(Graphics g) {
+        int x = 0;
+        int y = 0;
+        int width = 0;
+        int height = 0;
+
         for (MyButton b : tileButtons) {
-            g.drawImage(getButtImg(b.getId()),
-                    (int) b.getBounds().getX(),
-                    (int) b.getBounds().getY(),
-                    (int) b.getBounds().getWidth(),
-                    (int) b.getBounds().getHeight(),
-                    null);
+            x = (int) b.getBounds().getX();
+            y = (int) b.getBounds().getY();
+            width = (int) b.getBounds().getWidth();
+            height = (int) b.getBounds().getHeight();
+
+            //set borders
+            g.setColor(Color.black);
+            g.drawRect(x, y, width, height);
+
+            //get sprite for button
+            g.drawImage(getButtImg(b.getId()), x, y, width, height, null);
+
+            //mouseOver
+            if (b.isMouseOver()) {
+                g.setColor(Color.white);
+                g.drawRect(x, y, width, height);
+            } else {
+                g.setColor(Color.black);
+                g.drawRect(x, y, width, height);
+
+            }
+            ;
+            //MousePressed
+            if (b.isMousePressed()) {
+                g.drawRect(x + 1, y + 1, width - 2, height - 2);
+                g.drawRect(x + 2, y + 2, width - 4, height - 4);
+            }
         }
     }
 
