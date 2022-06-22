@@ -4,6 +4,7 @@ import core.Game;
 import core.GameStates;
 import helpz.LevelBuilder;
 import managers.TileManager;
+import ui.BottomBar;
 import ui.MyButton;
 
 import java.awt.*;
@@ -13,6 +14,7 @@ public class Playing extends GameScene implements SceneMethods {
     private int[][] lvl;
     private TileManager tileManager;
     private MyButton bMenu;
+    private BottomBar bottomBar;
 
 
     public Playing(Game game) {
@@ -20,6 +22,7 @@ public class Playing extends GameScene implements SceneMethods {
 
         lvl = LevelBuilder.getLevelData();
         tileManager = new TileManager();
+        bottomBar = new BottomBar(0, 640, 640, 100);
         initButtons();
     }
 
@@ -36,6 +39,8 @@ public class Playing extends GameScene implements SceneMethods {
                 g.drawImage(tileManager.getSprite(id), x * 32, y * 32, null);
             }
         }
+
+        drawBottom(g);
     }
 
     @Override
@@ -47,6 +52,11 @@ public class Playing extends GameScene implements SceneMethods {
     public void render(Graphics g) {
         drawContent(g);
         drawButtons(g);
+
+    }
+
+    private void drawBottom(Graphics g) {
+        bottomBar.draw(g);
     }
 
     //mouse events
