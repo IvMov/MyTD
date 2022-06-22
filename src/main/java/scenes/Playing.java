@@ -1,11 +1,9 @@
 package scenes;
 
 import core.Game;
-import core.GameStates;
 import helpz.LevelBuilder;
 import managers.TileManager;
 import ui.BottomBar;
-import ui.MyButton;
 
 import java.awt.*;
 
@@ -13,7 +11,6 @@ public class Playing extends GameScene implements SceneMethods {
 
     private int[][] lvl;
     private TileManager tileManager;
-    private MyButton bMenu;
     private BottomBar bottomBar;
 
 
@@ -23,12 +20,24 @@ public class Playing extends GameScene implements SceneMethods {
         lvl = LevelBuilder.getLevelData();
         tileManager = new TileManager();
         bottomBar = new BottomBar(0, 640, 640, 100);
-        initButtons();
+
+    }
+
+
+    @Override
+    public void render(Graphics g) {
+        drawContent(g);
+        drawBottom(g);
     }
 
     @Override
     public void initButtons() {
-        bMenu = new MyButton(5, 5, 120, 120 / 3, "Menu");
+
+    }
+
+    @Override
+    public void drawButtons(Graphics g) {
+
     }
 
     @Override
@@ -39,21 +48,8 @@ public class Playing extends GameScene implements SceneMethods {
                 g.drawImage(tileManager.getSprite(id), x * 32, y * 32, null);
             }
         }
-
-        drawBottom(g);
     }
 
-    @Override
-    public void drawButtons(Graphics g) {
-        bMenu.draw(g);
-    }
-
-    @Override
-    public void render(Graphics g) {
-        drawContent(g);
-        drawButtons(g);
-
-    }
 
     private void drawBottom(Graphics g) {
         bottomBar.draw(g);
@@ -62,24 +58,29 @@ public class Playing extends GameScene implements SceneMethods {
     //mouse events
     @Override
     public void mouseClicked(int x, int y) {
-        if (bMenu.getBounds().contains(x, y)) {
-            GameStates.setGameState(GameStates.MENU);
+        if (y >= 640) {
+            bottomBar.mouseClicked(x, y);
         }
     }
 
     @Override
     public void mouseMoved(int x, int y) {
-        bMenu.setMouseOver(bMenu.getBounds().contains(x, y));
+        if (y >= 640) {
+            bottomBar.mouseMoved(x, y);
+        }
     }
 
     @Override
     public void mousePressed(int x, int y) {
-        bMenu.setMousePressed(bMenu.getBounds().contains(x, y));
+        if (y >= 640) {
+            bottomBar.mousePressed(x, y);
+        }
     }
 
     @Override
     public void mouseReleased(int x, int y) {
-        bMenu.resetBooleans();
+        bottomBar.mouseReleased(x, y);
+
     }
 
 
