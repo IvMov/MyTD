@@ -11,6 +11,7 @@ import java.awt.*;
 public class Playing extends GameScene implements SceneMethods {
 
     private int mouseX, mouseY;
+    private int lastTileX, lastTileY, lastTileId; // to prevent unnecessary drawing already drawn tile
     private boolean drawSelect;
     private int[][] lvl;
     private TileManager tileManager;
@@ -78,10 +79,22 @@ public class Playing extends GameScene implements SceneMethods {
 
     private void changeTile(int x, int y) {
         //set coordinates in array
-        int tileX = x / 32;
-        int tileY = y / 32;
+        if (selectedTile != null) {
 
-        lvl[tileY][tileX] = selectedTile.getId();
+            int tileX = x / 32;
+            int tileY = y / 32;
+
+            if (lastTileX == tileX &&
+                    lastTileY == tileY &&
+                    lastTileId == selectedTile.getId()) {
+                return;
+            }
+            lastTileX = tileX;
+            lastTileY = tileY;
+            lastTileId = selectedTile.getId();
+            lvl[tileY][tileX] = selectedTile.getId();
+        }
+
 
     }
 
