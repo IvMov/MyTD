@@ -3,14 +3,18 @@ package scenes;
 import core.Game;
 import helpz.LevelBuilder;
 import managers.TileManager;
+import objects.Tile;
 import ui.BottomBar;
 
 import java.awt.*;
 
 public class Playing extends GameScene implements SceneMethods {
 
+    private int mouseX, mouseY;
+    private boolean drawSelect;
     private int[][] lvl;
     private TileManager tileManager;
+    private Tile selectedTile;
     private BottomBar bottomBar;
 
 
@@ -28,6 +32,13 @@ public class Playing extends GameScene implements SceneMethods {
     public void render(Graphics g) {
         drawContent(g);
         drawBottom(g);
+        drawSelectedTile(g);
+    }
+
+    private void drawSelectedTile(Graphics g) {
+        if (selectedTile != null && drawSelect) {
+            g.drawImage(selectedTile.getSprite(), mouseX, mouseY, 32, 32, null);
+        }
     }
 
     @Override
@@ -67,6 +78,11 @@ public class Playing extends GameScene implements SceneMethods {
     public void mouseMoved(int x, int y) {
         if (y >= 640) {
             bottomBar.mouseMoved(x, y);
+            drawSelect = false;
+        } else {
+            drawSelect = true;
+            mouseX = x;
+            mouseY = y;
         }
     }
 
@@ -85,5 +101,10 @@ public class Playing extends GameScene implements SceneMethods {
 
     public TileManager getTileManager() {
         return tileManager;
+    }
+
+    public void setSelectedTile(Tile selectedTile) {
+        this.selectedTile = selectedTile;
+        drawSelect = true;
     }
 }
