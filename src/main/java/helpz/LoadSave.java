@@ -2,6 +2,7 @@ package helpz;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -18,5 +19,16 @@ public class LoadSave {
         }
 
         return img;
+    }
+
+    //txt file
+
+    public static void createFile(){
+        File textFile = new File("src/main/resources/testTextFile.txt");
+        try {
+            textFile.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

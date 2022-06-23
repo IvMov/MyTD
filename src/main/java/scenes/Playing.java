@@ -2,6 +2,7 @@ package scenes;
 
 import core.Game;
 import helpz.LevelBuilder;
+import helpz.LoadSave;
 import managers.TileManager;
 import objects.Tile;
 import ui.BottomBar;
@@ -21,11 +22,10 @@ public class Playing extends GameScene implements SceneMethods {
 
     public Playing(Game game) {
         super(game);
-
         lvl = LevelBuilder.getLevelData();
         tileManager = new TileManager();
         bottomBar = new BottomBar(0, 640, 640, 100, this);
-
+        LoadSave.createFile();
     }
 
 
