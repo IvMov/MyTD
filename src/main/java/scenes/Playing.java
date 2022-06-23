@@ -25,7 +25,9 @@ public class Playing extends GameScene implements SceneMethods {
         lvl = LevelBuilder.getLevelData();
         tileManager = new TileManager();
         bottomBar = new BottomBar(0, 640, 640, 100, this);
-        LoadSave.createFile();
+
+        createDefaultLvl();
+
     }
 
 
@@ -77,27 +79,6 @@ public class Playing extends GameScene implements SceneMethods {
         }
     }
 
-    private void changeTile(int x, int y) {
-        //set coordinates in array
-        if (selectedTile != null) {
-
-            int tileX = x / 32;
-            int tileY = y / 32;
-
-            if (lastTileX == tileX &&
-                    lastTileY == tileY &&
-                    lastTileId == selectedTile.getId()) {
-                return;
-            }
-            lastTileX = tileX;
-            lastTileY = tileY;
-            lastTileId = selectedTile.getId();
-            lvl[tileY][tileX] = selectedTile.getId();
-        }
-
-
-    }
-
     @Override
     public void mouseMoved(int x, int y) {
         if (y >= 640) {
@@ -132,6 +113,34 @@ public class Playing extends GameScene implements SceneMethods {
             changeTile(x, y);
         }
     }
+
+    private void changeTile(int x, int y) {
+        //set coordinates in array
+        if (selectedTile != null) {
+
+            int tileX = x / 32;
+            int tileY = y / 32;
+
+            if (lastTileX == tileX &&
+                    lastTileY == tileY &&
+                    lastTileId == selectedTile.getId()) {
+                return;
+            }
+            lastTileX = tileX;
+            lastTileY = tileY;
+            lastTileId = selectedTile.getId();
+            lvl[tileY][tileX] = selectedTile.getId();
+        }
+    }
+
+    private void createDefaultLvl() {
+        int[] arr = new int[400];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = 0;
+        }
+        LoadSave.createLevel("new_lvl", arr);
+    }
+
 
     public TileManager getTileManager() {
         return tileManager;

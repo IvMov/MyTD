@@ -2,9 +2,8 @@ package helpz;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.Scanner;
 
 public class LoadSave {
 
@@ -21,13 +20,44 @@ public class LoadSave {
         return img;
     }
 
-    //txt file
-
-    public static void createFile(){
-        File textFile = new File("src/main/resources/testTextFile.txt");
+    public static void readFromFile() {
+        File textFile = new File("src/main/resources/test2TextFile.txt");
         try {
-            textFile.createNewFile();
-        } catch (IOException e) {
+            Scanner sc = new Scanner(textFile);
+            while (sc.hasNextLine()) {
+                System.out.println(sc.nextLine());
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void createLevel(String name, int[] idArr) {
+        File newLvl = new File("src/main/resources/" + name + ".txt");
+        if (newLvl.exists()) {
+            System.out.println("File with name: " + name + " already exists!");
+        } else {
+            try {
+                newLvl.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            writeToFile(newLvl, idArr);
+        }
+
+    }
+
+    private static void writeToFile(File f, int[] idArr) {
+
+        try {
+            PrintWriter pw = new PrintWriter(f);
+            for (Integer i : idArr) {
+                pw.println(i);
+            }
+            pw.close();
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
