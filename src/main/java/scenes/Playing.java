@@ -71,7 +71,18 @@ public class Playing extends GameScene implements SceneMethods {
     public void mouseClicked(int x, int y) {
         if (y >= 640) {
             bottomBar.mouseClicked(x, y);
+        } else {
+            changeTile(mouseX, mouseY);
         }
+    }
+
+    private void changeTile(int x, int y) {
+        //set coordinates in array
+        int tileX = x / 32;
+        int tileY = y / 32;
+
+        lvl[tileY][tileX] = selectedTile.getId();
+
     }
 
     @Override
@@ -91,12 +102,22 @@ public class Playing extends GameScene implements SceneMethods {
         if (y >= 640) {
             bottomBar.mousePressed(x, y);
         }
+
     }
 
     @Override
     public void mouseReleased(int x, int y) {
         bottomBar.mouseReleased(x, y);
 
+    }
+
+    @Override
+    public void mouseDragged(int x, int y) {
+        if (y >= 640) {
+            //temporary nothing
+        } else {
+            changeTile(x, y);
+        }
     }
 
     public TileManager getTileManager() {
