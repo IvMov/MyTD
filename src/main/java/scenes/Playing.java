@@ -8,6 +8,7 @@ import objects.Tile;
 import ui.BottomBar;
 
 import java.awt.*;
+import java.time.LocalDate;
 
 public class Playing extends GameScene implements SceneMethods {
 
@@ -27,9 +28,13 @@ public class Playing extends GameScene implements SceneMethods {
         bottomBar = new BottomBar(0, 640, 640, 100, this);
 
         createDefaultLvl();
+        loadDefaultLvl();
 
     }
 
+    public void saveLevel() {
+        LoadSave.SaveLevel("new_lvl", lvl);
+    }
 
     @Override
     public void render(Graphics g) {
@@ -38,11 +43,6 @@ public class Playing extends GameScene implements SceneMethods {
         drawSelectedTile(g);
     }
 
-    private void drawSelectedTile(Graphics g) {
-        if (selectedTile != null && drawSelect) {
-            g.drawImage(selectedTile.getSprite(), mouseX, mouseY, 32, 32, null);
-        }
-    }
 
     @Override
     public void initButtons() {
@@ -64,10 +64,6 @@ public class Playing extends GameScene implements SceneMethods {
         }
     }
 
-
-    private void drawBottom(Graphics g) {
-        bottomBar.draw(g);
-    }
 
     //mouse events
     @Override
@@ -114,6 +110,18 @@ public class Playing extends GameScene implements SceneMethods {
         }
     }
 
+
+    //private methods
+    private void drawSelectedTile(Graphics g) {
+        if (selectedTile != null && drawSelect) {
+            g.drawImage(selectedTile.getSprite(), mouseX, mouseY, 32, 32, null);
+        }
+    }
+
+    private void drawBottom(Graphics g) {
+        bottomBar.draw(g);
+    }
+
     private void changeTile(int x, int y) {
         //set coordinates in array
         if (selectedTile != null) {
@@ -138,10 +146,15 @@ public class Playing extends GameScene implements SceneMethods {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = 0;
         }
-        LoadSave.createLevel("new_lvl", arr);
+        LoadSave.CreateLevel("new_lvl", arr);
+    }
+
+    private void loadDefaultLvl() {
+        lvl = LoadSave.GetLevelData("new_lvl");
     }
 
 
+    //getters and setters
     public TileManager getTileManager() {
         return tileManager;
     }

@@ -1,6 +1,7 @@
 package ui;
 
 import core.GameStates;
+import helpz.LoadSave;
 import objects.Tile;
 import scenes.Playing;
 
@@ -12,7 +13,7 @@ public class BottomBar {
 
 
     private int x, y, width, height;
-    private MyButton bMenu;
+    private MyButton bMenu, bSave;
     private Playing playing;
 
     private Tile selectedTile;
@@ -31,6 +32,7 @@ public class BottomBar {
 
     public void initButtons() {
         bMenu = new MyButton(2, 642, 120, 120 / 3, "Menu");
+        bSave = new MyButton(560, 642, 78, 30, "Save");
         int xPosition = 130;
         int yPosition = 642;
         int width = 40;
@@ -52,6 +54,7 @@ public class BottomBar {
 
     public void drawButtons(Graphics g) {
         bMenu.draw(g);
+        bSave.draw(g);
         drawTileButtons(g);
         drawSelectedTile(g);
     }
@@ -59,6 +62,8 @@ public class BottomBar {
     public void mouseClicked(int x, int y) {
         if (bMenu.getBounds().contains(x, y)) {
             GameStates.setGameState(GameStates.MENU);
+        } else if (bSave.getBounds().contains(x, y)) {
+            saveLevel();
         } else {
             for (MyButton b : tileButtons) {
                 if (b.getBounds().contains(x, y)) {
@@ -73,7 +78,7 @@ public class BottomBar {
 
     public void mouseMoved(int x, int y) {
         bMenu.setMouseOver(bMenu.getBounds().contains(x, y));
-
+        bSave.setMouseOver(bSave.getBounds().contains(x, y));
         for (MyButton b : tileButtons) {
             b.setMouseOver(b.getBounds().contains(x, y));
         }
@@ -81,6 +86,7 @@ public class BottomBar {
 
     public void mousePressed(int x, int y) {
         bMenu.setMousePressed(bMenu.getBounds().contains(x, y));
+        bSave.setMousePressed(bSave.getBounds().contains(x, y));
         for (MyButton b : tileButtons) {
             b.setMousePressed(b.getBounds().contains(x, y));
         }
@@ -88,6 +94,7 @@ public class BottomBar {
 
     public void mouseReleased(int x, int y) {
         bMenu.resetBooleans();
+        bSave.resetBooleans();
         for (MyButton b : tileButtons) {
             b.resetBooleans();
         }
@@ -96,9 +103,9 @@ public class BottomBar {
 
     private void drawSelectedTile(Graphics g) {
         if (selectedTile != null) {
-            g.drawImage(selectedTile.getSprite(), 550, 650, 60, 60, null);
+            g.drawImage(selectedTile.getSprite(), 580, 674, 40, 40, null);
             g.setColor(Color.black);
-            g.drawRect(550, 650, 60, 60);
+            g.drawRect(580, 674, 40, 40);
         }
     }
 
@@ -138,6 +145,11 @@ public class BottomBar {
             }
         }
     }
+
+    private void saveLevel() {
+        playing.saveLevel();
+    }
+
 
     public BufferedImage getButtImg(int id) {
         return playing.getTileManager().getSprite(id);
