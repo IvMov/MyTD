@@ -81,8 +81,8 @@ public class Playing extends GameScene implements SceneMethods {
             drawSelect = false;
         } else {
             drawSelect = true;
-            mouseX = x;
-            mouseY = y;
+            mouseX = (x / 32) * 32;
+            mouseY = (y / 32) * 32;
         }
     }
 
