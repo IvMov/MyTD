@@ -1,6 +1,7 @@
 package ui;
 
 import core.GameStates;
+import helpz.LoadSave;
 import managers.TileManager;
 import objects.Tile;
 import scenes.Editing;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 
 public class EditingBar extends Bar {
 
+    private int[][] lvl;
     private MyButton bMenu, bSave;
     private Editing editing;
 
@@ -135,6 +137,8 @@ public class EditingBar extends Bar {
 
     private void saveLevel() {
         editing.saveLevel();
+        lvl = LoadSave.GetLevelData("new_lvl");
+        editing.getGame().getPlaying().setLvl(lvl);
     }
 
     private void initNavButtons() {
