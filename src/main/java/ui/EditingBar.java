@@ -1,49 +1,33 @@
 package ui;
 
 import core.GameStates;
-import helpz.LoadSave;
+import managers.TileManager;
 import objects.Tile;
-import scenes.Playing;
+import scenes.Editing;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class BottomBar {
+public class EditingBar extends Bar {
 
-
-    private int x, y, width, height;
     private MyButton bMenu, bSave;
-    private Playing playing;
+    private Editing editing;
 
     private Tile selectedTile;
 
     private ArrayList<MyButton> tileButtons = new ArrayList<>();
 
-    public BottomBar(int x, int y, int width, int height, Playing playing) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.playing = playing;
+    public EditingBar(int x, int y, int width, int height, Editing editing) {
+        super(x, y, width, height);
+        this.editing = editing;
 
         initButtons();
     }
 
     public void initButtons() {
-        bMenu = new MyButton(2, 642, 120, 120 / 3, "Menu");
-        bSave = new MyButton(560, 642, 78, 30, "Save");
-        int xPosition = 130;
-        int yPosition = 642;
-        int width = 40;
-        int height = 40;
-        int xOffset = (int) (width * 1.1f);
-        int i = 0;
-
-        for (Tile tile : playing.getTileManager().tiles) {
-            tileButtons.add(new MyButton(i++, xPosition, yPosition, width, height, tile.getName()));
-            xPosition = xPosition + xOffset;
-        }
+        initNavButtons();
+        initTileButtons();
     }
 
     public void draw(Graphics g) {
@@ -55,9 +39,11 @@ public class BottomBar {
     public void drawButtons(Graphics g) {
         bMenu.draw(g);
         bSave.draw(g);
+
         drawTileButtons(g);
         drawSelectedTile(g);
     }
+
 
     public void mouseClicked(int x, int y) {
         if (bMenu.getBounds().contains(x, y)) {
@@ -67,8 +53,8 @@ public class BottomBar {
         } else {
             for (MyButton b : tileButtons) {
                 if (b.getBounds().contains(x, y)) {
-                    selectedTile = playing.getTileManager().getTile(b.getId());
-                    playing.setSelectedTile(selectedTile);
+                    selectedTile = takeTileManager().getTile(b.getId());
+                    editing.setSelectedTile(selectedTile);
                     return;
                 }
             }
@@ -101,13 +87,6 @@ public class BottomBar {
 
     }
 
-    private void drawSelectedTile(Graphics g) {
-        if (selectedTile != null) {
-            g.drawImage(selectedTile.getSprite(), 580, 674, 40, 40, null);
-            g.setColor(Color.black);
-            g.drawRect(580, 674, 40, 40);
-        }
-    }
 
     private void drawTileButtons(Graphics g) {
         int x = 0;
@@ -146,14 +125,44 @@ public class BottomBar {
         }
     }
 
-    private void saveLevel() {
-        playing.saveLevel();
+    private void drawSelectedTile(Graphics g) {
+        if (selectedTile != null) {
+            g.drawImage(selectedTile.getSprite(), 580, 674, 40, 40, null);
+            g.setColor(Color.black);
+            g.drawRect(580, 674, 40, 40);
+        }
     }
 
+    private void saveLevel() {
+        editing.saveLevel();
+    }
+
+    private void initNavButtons() {
+        bMenu = new MyButton(2, 642, 120, 120 / 3, "Menu");
+        bSave = new MyButton(560, 642, 78, 30, "Save");
+    }
+
+    private void initTileButtons() {
+        int xPosition = 130;
+        int yPosition = 642;
+        int width = 40;
+        int height = 40;
+        int xOffset = (int) (width * 1.1f);
+        int i = 0;
+
+        for (Tile tile : takeTileManager().tiles) {
+            tileButtons.add(new MyButton(i++, xPosition, yPosition, width, height, tile.getName()));
+            xPosition = xPosition + xOffset;
+        }
+    }
 
     public BufferedImage getButtImg(int id) {
-        return playing.getTileManager().getSprite(id);
+        return takeTileManager().getSprite(id);
 
     }
-}
 
+    private TileManager takeTileManager() {
+        return editing.getGame().getTileManager();
+    }
+
+}

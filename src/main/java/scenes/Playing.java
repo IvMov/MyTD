@@ -1,57 +1,40 @@
 package scenes;
 
 import core.Game;
-import helpz.LevelBuilder;
 import helpz.LoadSave;
-import managers.TileManager;
-import objects.Tile;
-import ui.BottomBar;
+import ui.PlayingBar;
 
 import java.awt.*;
-import java.time.LocalDate;
+import java.awt.image.BufferedImage;
 
 public class Playing extends GameScene implements SceneMethods {
 
-    private int mouseX, mouseY;
-    private int lastTileX, lastTileY, lastTileId; // to prevent unnecessary drawing already drawn tile
-    private boolean drawSelect;
+    private int mouseX, mouseY; //will be used later
     private int[][] lvl;
-    private TileManager tileManager;
-    private Tile selectedTile;
-    private BottomBar bottomBar;
+    private PlayingBar playingBar;
 
 
     public Playing(Game game) {
         super(game);
-        lvl = LevelBuilder.getLevelData();
-        tileManager = new TileManager();
-        bottomBar = new BottomBar(0, 640, 640, 100, this);
 
-        createDefaultLvl();
         loadDefaultLvl();
+        playingBar = new PlayingBar(0, 640, 640, 100, this);
 
     }
 
-    public void saveLevel() {
-        LoadSave.SaveLevel("new_lvl", lvl);
-    }
 
     @Override
     public void render(Graphics g) {
         drawContent(g);
-        drawBottom(g);
-        drawSelectedTile(g);
+        drawPlayingBar(g);
     }
-
 
     @Override
     public void initButtons() {
-
     }
 
     @Override
     public void drawButtons(Graphics g) {
-
     }
 
     @Override
@@ -59,7 +42,7 @@ public class Playing extends GameScene implements SceneMethods {
         for (int y = 0; y < lvl.length; y++) {
             for (int x = 0; x < lvl[y].length; x++) {
                 int id = lvl[y][x];
-                g.drawImage(tileManager.getSprite(id), x * 32, y * 32, null);
+                g.drawImage(getSprite(id), x * 32, y * 32, null);
             }
         }
     }
@@ -69,19 +52,15 @@ public class Playing extends GameScene implements SceneMethods {
     @Override
     public void mouseClicked(int x, int y) {
         if (y >= 640) {
-            bottomBar.mouseClicked(x, y);
-        } else {
-            changeTile(mouseX, mouseY);
+            playingBar.mouseClicked(x, y);
         }
     }
 
     @Override
     public void mouseMoved(int x, int y) {
         if (y >= 640) {
-            bottomBar.mouseMoved(x, y);
-            drawSelect = false;
+            playingBar.mouseMoved(x, y);
         } else {
-            drawSelect = true;
             mouseX = (x / 32) * 32;
             mouseY = (y / 32) * 32;
         }
@@ -90,77 +69,35 @@ public class Playing extends GameScene implements SceneMethods {
     @Override
     public void mousePressed(int x, int y) {
         if (y >= 640) {
-            bottomBar.mousePressed(x, y);
+            playingBar.mousePressed(x, y);
         }
-
     }
 
     @Override
     public void mouseReleased(int x, int y) {
-        bottomBar.mouseReleased(x, y);
-
+        playingBar.mouseReleased(x, y);
     }
 
     @Override
     public void mouseDragged(int x, int y) {
-        if (y >= 640) {
-            //temporary nothing
-        } else {
-            changeTile(x, y);
-        }
     }
 
 
     //private methods
-    private void drawSelectedTile(Graphics g) {
-        if (selectedTile != null && drawSelect) {
-            g.drawImage(selectedTile.getSprite(), mouseX, mouseY, 32, 32, null);
-        }
-    }
 
-    private void drawBottom(Graphics g) {
-        bottomBar.draw(g);
-    }
-
-    private void changeTile(int x, int y) {
-        //set coordinates in array
-        if (selectedTile != null) {
-
-            int tileX = x / 32;
-            int tileY = y / 32;
-
-            if (lastTileX == tileX &&
-                    lastTileY == tileY &&
-                    lastTileId == selectedTile.getId()) {
-                return;
-            }
-            lastTileX = tileX;
-            lastTileY = tileY;
-            lastTileId = selectedTile.getId();
-            lvl[tileY][tileX] = selectedTile.getId();
-        }
-    }
-
-    private void createDefaultLvl() {
-        int[] arr = new int[400];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = 0;
-        }
-        LoadSave.CreateLevel("new_lvl", arr);
+    private void drawPlayingBar(Graphics g) {
+        playingBar.draw(g);
     }
 
     private void loadDefaultLvl() {
         lvl = LoadSave.GetLevelData("new_lvl");
     }
 
+    private BufferedImage getSprite(int spriteId) {
+        return getGame().getTileManager().getSprite(spriteId);
+    }
 
     //getters and setters
-    public TileManager getTileManager() {
-        return tileManager;
-    }
 
-    public void setSelectedTile(Tile selectedTile) {
-        this.selectedTile = selectedTile;
-        drawSelect = true;
-    }
+
 }

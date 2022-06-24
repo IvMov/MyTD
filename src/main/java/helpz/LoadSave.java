@@ -4,13 +4,12 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class LoadSave {
 
     public static BufferedImage getSpriteAtlas() {
-        BufferedImage img = null;
+        BufferedImage img;
         InputStream is = LoadSave.class.getClassLoader().getResourceAsStream("spriteatlas.png");
 
         try {
@@ -39,10 +38,13 @@ public class LoadSave {
     }
 
     public static int[][] GetLevelData(String name) {
+
         File lvlFile = new File("src/main/resources/" + name + ".txt");
+
         if (lvlFile.exists()) {
             ArrayList<Integer> list = ReadFromFile(lvlFile);
             return Utilz.ArrayLisTo2dInt(list, 20, 20);
+
         } else {
             System.out.println("File with name: " + name + " NOT exist");
             return null;

@@ -48,12 +48,10 @@ public class MyButton {
         drawBody(g);
 
         //border
-        drawBodrder(g);
-
+        drawBorder(g);
 
         //text
         drawText(g);
-
     }
 
     public void resetBooleans() {
@@ -61,7 +59,7 @@ public class MyButton {
         this.mousePressed = false;
     }
 
-    private void drawBodrder(Graphics g) {
+    private void drawBorder(Graphics g) {
         if (mousePressed) {
             g.setColor(Color.black);
             g.drawRect(x + 1, y + 1, width - 2, height - 2);

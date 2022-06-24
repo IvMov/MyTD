@@ -14,14 +14,17 @@ public class KeyboardListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_A) {
+        if (e.getKeyCode() == KeyEvent.VK_P) {
             GameStates.gameState = GameStates.MENU;
 
-        } else if(e.getKeyCode() == KeyEvent.VK_S){
+        } else if (e.getKeyCode() == KeyEvent.VK_S) {
             GameStates.gameState = GameStates.SETTINGS;
 
-        } else if(e.getKeyCode() == KeyEvent.VK_D){
+        } else if (e.getKeyCode() == KeyEvent.VK_A) {
             GameStates.gameState = GameStates.PLAYING;
+
+        } else if (e.getKeyCode() == KeyEvent.VK_E) {
+            GameStates.gameState = GameStates.EDIT;
         }
 
     }
