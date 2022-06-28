@@ -10,7 +10,7 @@ public class LoadSave {
 
     public static BufferedImage getSpriteAtlas() {
         BufferedImage img;
-        InputStream is = LoadSave.class.getClassLoader().getResourceAsStream("spriteatlas.png");
+        InputStream is = LoadSave.class.getClassLoader().getResourceAsStream("sprite_atlas.png");
 
         try {
             img = ImageIO.read(is);
