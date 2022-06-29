@@ -8,8 +8,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class TileManager {
-
-    public Tile GRASS, WATTER, ROAD, BL_WATTER_CORNER;
+    //B-bottom, T- top, L - left, R - right, C-corner
+    public Tile GRASS, WATTER, ROAD, BL_WATTER_C, TL_WATTER_C;
     public BufferedImage atlas;
     public ArrayList<Tile> tiles = new ArrayList<>();
 
@@ -23,11 +23,17 @@ public class TileManager {
         tiles.add(GRASS = new Tile(id++, "Grass", getSprite(9, 0)));
         tiles.add(WATTER = new Tile(id++, "Watter", getSprite(0, 0)));
         tiles.add(ROAD = new Tile(id++, "Road", getSprite(8, 0)));
-        tiles.add(BL_WATTER_CORNER
+        tiles.add(BL_WATTER_C
                 = new Tile(
                 id++,
                 "BL water corner",
                 ImgFix.buildLayeredImg(getImgs(0, 0, 5, 0)))
+        );
+        tiles.add(TL_WATTER_C
+                = new Tile(
+                id++,
+                "TL water corner",
+                ImgFix.getBuildRotImg(getImgs(0, 0, 5, 0), 90, 1))
         );
 
     }
