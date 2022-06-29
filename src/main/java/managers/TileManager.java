@@ -1,5 +1,6 @@
 package managers;
 
+import helpz.ImgFix;
 import helpz.LoadSave;
 import objects.Tile;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 
 public class TileManager {
 
-    public Tile GRASS, WATTER, ROAD;
+    public Tile GRASS, WATTER, ROAD, BL_WATTER_CORNER;
     public BufferedImage atlas;
     public ArrayList<Tile> tiles = new ArrayList<>();
 
@@ -22,7 +23,18 @@ public class TileManager {
         tiles.add(GRASS = new Tile(id++, "Grass", getSprite(9, 0)));
         tiles.add(WATTER = new Tile(id++, "Watter", getSprite(0, 0)));
         tiles.add(ROAD = new Tile(id++, "Road", getSprite(8, 0)));
+        tiles.add(BL_WATTER_CORNER
+                = new Tile(
+                id++,
+                "BL water corner",
+                ImgFix.buildLayeredImg(getImgs(0, 0, 5, 0)))
+        );
 
+    }
+
+    private BufferedImage[] getImgs(int firstX, int firstY, int secondX, int secondY) {
+        return new BufferedImage[]{getSprite(firstX, firstY),
+                getSprite(secondX, secondY)};
     }
 
     private void loadAtlas() {
