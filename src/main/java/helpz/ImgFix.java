@@ -22,7 +22,7 @@ public class ImgFix {
     }
 
     //rotate only index img
-    public static BufferedImage getBuildRotImg(BufferedImage[] imgs, int rotAngle, int rotAtIndex) {
+    public static BufferedImage buildRotImg(BufferedImage[] imgs, int rotAngle, int rotAtIndex) {
         int w = imgs[0].getWidth();
         int h = imgs[0].getHeight();
 
