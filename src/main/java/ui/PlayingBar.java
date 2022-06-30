@@ -24,7 +24,7 @@ public class PlayingBar extends Bar{
 
     public void draw(Graphics g) {
         g.setColor(new Color(220, 123, 15));
-        g.fillRect(x, y, width, height);
+        g.fillRect(xStart, yStart, width, height);
         drawButtons(g);
     }
 

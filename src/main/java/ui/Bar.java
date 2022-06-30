@@ -3,11 +3,11 @@ package ui;
 
 public class Bar {
 
-    protected int x, y, width, height;
+    protected int xStart, yStart, width, height;
 
-    public Bar(int x, int y, int width, int height) {
-        this.x = x;
-        this.y = y;
+    public Bar(int xStart, int y, int width, int height) {
+        this.xStart = xStart;
+        this.yStart = y;
         this.width = width;
         this.height = height;
     }

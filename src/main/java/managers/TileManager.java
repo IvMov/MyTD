@@ -17,6 +17,11 @@ public class TileManager {
             WATER_TL_D, WATER_TR_D, WATER_BR_D, WATER_BL_D;
     public BufferedImage atlas;
     public ArrayList<Tile> tiles = new ArrayList<>();
+    public ArrayList<Tile> roadsS = new ArrayList<>();
+    public ArrayList<Tile> roadsC = new ArrayList<>();
+    public ArrayList<Tile> waterC = new ArrayList<>();
+    public ArrayList<Tile> waterLines = new ArrayList<>();
+    public ArrayList<Tile> waterD = new ArrayList<>();
 
     public TileManager() {
         loadAtlas();
@@ -26,33 +31,39 @@ public class TileManager {
     private void createTiles() {
         //TODO: need to a lot refactor this method and ImgFix class methods!
         int id = 0;
+
         tiles.add(GRASS = new Tile(id++, "Grass", getSprite(9, 0)));
         tiles.add(WATER = new Tile(id++, "Water", getSprite(0, 0)));
 
-        tiles.add(ROAD_H = new Tile(id++, "Road_H", getSprite(8, 0)));
-        tiles.add(ROAD_V = new Tile(id++, "Road_V", ImgFix.getRotateImg(getSprite(8, 0), 90)));
+        roadsS.add(ROAD_H = new Tile(id++, "Road_H", getSprite(8, 0)));
+        roadsS.add(ROAD_V = new Tile(id++, "Road_V", ImgFix.getRotateImg(getSprite(8, 0), 90)));
 
-        tiles.add(ROAD_TL_C = new Tile(id++, "Road_H", getSprite(7, 0)));
-        tiles.add(ROAD_TR_C = new Tile(id++, "Road_V", ImgFix.getRotateImg(getSprite(7, 0), 90)));
-        tiles.add(ROAD_BR_C = new Tile(id++, "Road_V", ImgFix.getRotateImg(getSprite(7, 0), 180)));
-        tiles.add(ROAD_BL_C = new Tile(id++, "Road_V", ImgFix.getRotateImg(getSprite(7, 0), 270)));
+        roadsC.add(ROAD_TL_C = new Tile(id++, "Road_H", getSprite(7, 0)));
+        roadsC.add(ROAD_TR_C = new Tile(id++, "Road_V", ImgFix.getRotateImg(getSprite(7, 0), 90)));
+        roadsC.add(ROAD_BR_C = new Tile(id++, "Road_V", ImgFix.getRotateImg(getSprite(7, 0), 180)));
+        roadsC.add(ROAD_BL_C = new Tile(id++, "Road_V", ImgFix.getRotateImg(getSprite(7, 0), 270)));
 
 
-        tiles.add(WATER_T = new Tile(id++, "Water_T_line", ImgFix.buildLayeredImg(getImgs(0, 0, 6, 0))));
-        tiles.add(WATER_R = new Tile(id++, "Water_R_line", ImgFix.buildRotImg(getImgs(0, 0, 6, 0), 90, 1)));
-        tiles.add(WATER_B = new Tile(id++, "Water_B_line", ImgFix.buildRotImg(getImgs(0, 0, 6, 0), 180, 1)));
-        tiles.add(WATER_L = new Tile(id++, "Water_L_line", ImgFix.buildRotImg(getImgs(0, 0, 6, 0), 270, 1)));
+        waterLines.add(WATER_T = new Tile(id++, "Water_T_line", ImgFix.buildLayeredImg(getImgs(0, 0, 6, 0))));
+        waterLines.add(WATER_R = new Tile(id++, "Water_R_line", ImgFix.buildRotImg(getImgs(0, 0, 6, 0), 90, 1)));
+        waterLines.add(WATER_B = new Tile(id++, "Water_B_line", ImgFix.buildRotImg(getImgs(0, 0, 6, 0), 180, 1)));
+        waterLines.add(WATER_L = new Tile(id++, "Water_L_line", ImgFix.buildRotImg(getImgs(0, 0, 6, 0), 270, 1)));
 
-        tiles.add(WATER_BL_C = new Tile(id++, "Water_BL_corner", ImgFix.buildLayeredImg(getImgs(0, 0, 5, 0))));
-        tiles.add(WATER_TL_C = new Tile(id++, "Water_TL_corner", ImgFix.buildRotImg(getImgs(0, 0, 5, 0), 90, 1)));
-        tiles.add(WATER_TR_C = new Tile(id++, "Water_TR_corner", ImgFix.buildRotImg(getImgs(0, 0, 5, 0), 180, 1)));
-        tiles.add(WATER_BR_C = new Tile(id++, "Water_BR_corner", ImgFix.buildRotImg(getImgs(0, 0, 5, 0), 270, 1)));
+        waterC.add(WATER_BL_C = new Tile(id++, "Water_BL_corner", ImgFix.buildLayeredImg(getImgs(0, 0, 5, 0))));
+        waterC.add(WATER_TL_C = new Tile(id++, "Water_TL_corner", ImgFix.buildRotImg(getImgs(0, 0, 5, 0), 90, 1)));
+        waterC.add(WATER_TR_C = new Tile(id++, "Water_TR_corner", ImgFix.buildRotImg(getImgs(0, 0, 5, 0), 180, 1)));
+        waterC.add(WATER_BR_C = new Tile(id++, "Water_BR_corner", ImgFix.buildRotImg(getImgs(0, 0, 5, 0), 270, 1)));
 
-        tiles.add(WATER_TL_D = new Tile(id++, "Water_TL_dot", ImgFix.buildLayeredImg(getImgs(0, 0, 4, 0))));
-        tiles.add(WATER_TR_D = new Tile(id++, "Water_TR_dot", ImgFix.buildRotImg(getImgs(0, 0, 4, 0), 90, 1)));
-        tiles.add(WATER_BR_D = new Tile(id++, "Water_BR_dot", ImgFix.buildRotImg(getImgs(0, 0, 4, 0), 180, 1)));
-        tiles.add(WATER_BL_D = new Tile(id++, "Water_BL_dot", ImgFix.buildRotImg(getImgs(0, 0, 4, 0), 270, 1)));
+        waterD.add(WATER_TL_D = new Tile(id++, "Water_TL_dot", ImgFix.buildLayeredImg(getImgs(0, 0, 4, 0))));
+        waterD.add(WATER_TR_D = new Tile(id++, "Water_TR_dot", ImgFix.buildRotImg(getImgs(0, 0, 4, 0), 90, 1)));
+        waterD.add(WATER_BR_D = new Tile(id++, "Water_BR_dot", ImgFix.buildRotImg(getImgs(0, 0, 4, 0), 180, 1)));
+        waterD.add(WATER_BL_D = new Tile(id++, "Water_BL_dot", ImgFix.buildRotImg(getImgs(0, 0, 4, 0), 270, 1)));
 
+        tiles.addAll(roadsS);
+        tiles.addAll(roadsC);
+        tiles.addAll(waterLines);
+        tiles.addAll(waterC);
+        tiles.addAll(waterD);
     }
 
     //where x y - coordinates in sprite_atlas
@@ -75,5 +86,25 @@ public class TileManager {
 
     public Tile getTile(int id) {
         return tiles.get(id);
+    }
+
+    public ArrayList<Tile> getRoadsS() {
+        return roadsS;
+    }
+
+    public ArrayList<Tile> getRoadsC() {
+        return roadsC;
+    }
+
+    public ArrayList<Tile> getWaterC() {
+        return waterC;
+    }
+
+    public ArrayList<Tile> getWaterLines() {
+        return waterLines;
+    }
+
+    public ArrayList<Tile> getWaterD() {
+        return waterD;
     }
 }
