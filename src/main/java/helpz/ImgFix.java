@@ -43,6 +43,28 @@ public class ImgFix {
         return newImg;
     }
 
+    //rotate only index img + animation
+    public static BufferedImage[] buildAnimatedRotImgWater(BufferedImage[] imgs, BufferedImage secondImg, int rotAngle) {
+        int w = imgs[0].getWidth();
+        int h = imgs[0].getHeight();
+
+        BufferedImage[] arr = new BufferedImage[imgs.length];
+
+        for (int i = 0; i < imgs.length; i++) {
+            BufferedImage newImg = new BufferedImage(w, h, imgs[0].getType());
+            Graphics2D g2d = newImg.createGraphics();
+
+            g2d.drawImage(imgs[i], 0, 0, null);
+            g2d.rotate(Math.toRadians(rotAngle), w / 2, h / 2);
+            g2d.drawImage(secondImg, 0, 0, null);
+            g2d.dispose();
+
+            arr[i] = newImg;
+        }
+
+        return arr;
+    }
+
     //Img layers build
     public static BufferedImage buildLayeredImg(BufferedImage[] imgs) {
 
