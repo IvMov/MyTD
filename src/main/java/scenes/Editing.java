@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 
 public class Editing extends GameScene implements SceneMethods {
 
+    public final int ANIMATION_SPEED = 20; //more means slower!
+
     private boolean drawSelect;
     private int mouseX, mouseY;
     private int lastTileX, lastTileY, lastTileId; // to prevent unnecessary drawing already drawn tile
@@ -69,7 +71,7 @@ public class Editing extends GameScene implements SceneMethods {
 
     private void updateTick() {
         tick++;
-        if (tick >= 20) {
+        if (tick >= ANIMATION_SPEED) { //used to do faster/slower animation
             tick = 0;
             animationIndex++;
             if (animationIndex >= 4) {
