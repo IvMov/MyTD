@@ -141,7 +141,7 @@ public class EditingBar extends Bar {
         for (Map.Entry<MyButton, ArrayList<Tile>> entry : buttonsHashMap.entrySet()) {
 
             MyButton b = entry.getKey();
-            BufferedImage img = entry.getValue().get(0).getSprite();
+            BufferedImage img = entry.getValue().get(0).getOneSprite();
 
             int x = b.getBounds().x;
             int y = b.getBounds().y;
@@ -158,7 +158,7 @@ public class EditingBar extends Bar {
 
     private void drawSelectedTile(Graphics g) {
         if (selectedTile != null) {
-            g.drawImage(selectedTile.getSprite(), 580, 674, 40, 40, null);
+            g.drawImage(selectedTile.getOneSprite(), 580, 674, 40, 40, null);
             g.setColor(Color.black);
             g.drawRect(580, 674, 40, 40);
         }

@@ -18,6 +18,9 @@ public class Editing extends GameScene implements SceneMethods {
     private Tile selectedTile;
     private final EditingBar editingBar;
 
+    private int animationIndex;
+    private int tick;
+
 
     public Editing(Game game) {
         super(game);
@@ -40,10 +43,15 @@ public class Editing extends GameScene implements SceneMethods {
         for (int y = 0; y < lvl.length; y++) {
             for (int x = 0; x < lvl[y].length; x++) {
                 int id = lvl[y][x];
-                g.drawImage(getSprite(id), x * 32, y * 32, null);
+                if (isAnimation(id)) {
+                    g.drawImage(getSprite(id, animationIndex), x * 32, y * 32, null);
+                } else {
+                    g.drawImage(getSprite(id), x * 32, y * 32, null);
+                }
             }
         }
     }
+
 
     @Override
     public void drawButtons(Graphics g) {
@@ -52,9 +60,22 @@ public class Editing extends GameScene implements SceneMethods {
 
     @Override
     public void render(Graphics g) {
+        updateTick();
+
         drawContent(g);
         drawEditingBar(g);
         drawSelectedTile(g);
+    }
+
+    private void updateTick() {
+        tick++;
+        if (tick >= 20) {
+            tick = 0;
+            animationIndex++;
+            if (animationIndex >= 4) {
+                animationIndex = 0;
+            }
+        }
     }
 
 
@@ -107,13 +128,17 @@ public class Editing extends GameScene implements SceneMethods {
         }
     }
 
+    private boolean isAnimation(int spriteId) {
+        return getGame().getTileManager().isSpriteAnimation(spriteId);
+    }
+
     private void drawEditingBar(Graphics g) {
         editingBar.draw(g);
     }
 
     private void drawSelectedTile(Graphics g) {
         if (selectedTile != null && drawSelect) {
-            g.drawImage(selectedTile.getSprite(), mouseX, mouseY, 32, 32, null);
+            g.drawImage(selectedTile.getOneSprite(), mouseX, mouseY, 32, 32, null);
         }
     }
 
@@ -138,6 +163,10 @@ public class Editing extends GameScene implements SceneMethods {
 
     private BufferedImage getSprite(int id) {
         return getGame().getTileManager().getSprite(id);
+    }
+
+    private BufferedImage getSprite(int id, int animationIndex) {
+        return getGame().getTileManager().getSpriteByIndex(id, animationIndex);
     }
 
     private void loadDefaultLvl() {

@@ -28,12 +28,17 @@ public class TileManager {
         createTiles();
     }
 
+    public boolean isSpriteAnimation(int spriteId) {
+        return tiles.get(spriteId).isAnimation();
+    }
+
+
     private void createTiles() {
         //TODO: need to a lot refactor this method and ImgFix class methods!
         int id = 0;
 
         tiles.add(GRASS = new Tile(id++, "Grass", getSprite(9, 0)));
-        tiles.add(WATER = new Tile(id++, "Water", getSprite(0, 0)));
+        tiles.add(WATER = new Tile(id++, "Water", getSpritesAnimationWater(0, 0)));
 
         roadsS.add(ROAD_H = new Tile(id++, "Road_H", getSprite(8, 0)));
         roadsS.add(ROAD_V = new Tile(id++, "Road_V", ImgFix.getRotateImg(getSprite(8, 0), 90)));
@@ -80,8 +85,20 @@ public class TileManager {
         return atlas.getSubimage(xCord * 32, yCord * 32, 32, 32);
     }
 
+    private BufferedImage[] getSpritesAnimationWater(int xCord, int yCord) {
+        BufferedImage[] arr = new BufferedImage[4];
+        for (int i = 0; i < 4; i++) {
+            arr[i] = getSprite(xCord+i, yCord);
+        }
+        return arr;
+    }
+
     public BufferedImage getSprite(int id) {
-        return tiles.get(id).getSprite();
+        return tiles.get(id).getOneSprite();
+    }
+
+    public BufferedImage getSpriteByIndex(int id, int animationIndex) {
+        return tiles.get(id).getSpriteByIndex(animationIndex);
     }
 
     public Tile getTile(int id) {
