@@ -1,4 +1,4 @@
-package core;
+import core.Game;
 
 public class GameRunner {
 

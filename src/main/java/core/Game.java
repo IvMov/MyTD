@@ -43,7 +43,7 @@ public class Game extends JFrame implements Runnable {
         setVisible(true);
     }
 
-    protected void startGameThread() {
+    public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
     }
@@ -108,7 +108,6 @@ public class Game extends JFrame implements Runnable {
         playing = new Playing(this);
         settings = new Settings(this);
         editing = new Editing(this);
-
     }
 
 }
