@@ -1,11 +1,13 @@
 package ui;
 
-import core.GameStates;
+import core.GameState;
+import lombok.Getter;
 import managers.TileManager;
 import scenes.Playing;
 
 import java.awt.*;
 
+@Getter
 public class PlayingBar extends Bar{
 
     private MyButton bMenu;
@@ -34,7 +36,7 @@ public class PlayingBar extends Bar{
 
     public void mouseClicked(int x, int y) {
         if (bMenu.getBounds().contains(x, y)) {
-            GameStates.setGameState(GameStates.MENU);
+            playing.getGame().setGameState(GameState.MENU);
         }
     }
 
@@ -48,12 +50,6 @@ public class PlayingBar extends Bar{
 
     public void mouseReleased(int x, int y) {
         bMenu.resetBooleans();
-    }
-
-    //private methods
-
-    private TileManager getTileManager() {
-        return playing.getGame().getTileManager();
     }
 }
 

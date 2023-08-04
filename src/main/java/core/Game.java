@@ -1,6 +1,8 @@
 package core;
 
 import helpz.LoadSave;
+import lombok.Getter;
+import lombok.Setter;
 import managers.TileManager;
 import scenes.Editing;
 import scenes.Menu;
@@ -9,6 +11,8 @@ import scenes.Settings;
 
 import javax.swing.*;
 
+@Getter
+@Setter
 public class Game extends JFrame implements Runnable {
 
     private static final int FPS_SET = 120;
@@ -16,16 +20,15 @@ public class Game extends JFrame implements Runnable {
 
     private GameScreen gameScreen;
     private Thread gameThread;
+    private GameRender gameRender;
+    private GameState gameState;
 
-    //Classes
-    private Render render;
+    //game stages/screens
     private Menu menu;
     private Playing playing;
     private Settings settings;
     private Editing editing;
-
     private TileManager tileManager;
-
 
     public Game() {
 
@@ -40,18 +43,11 @@ public class Game extends JFrame implements Runnable {
         setVisible(true);
     }
 
-    private void start() { //for me - method to create new Thread and start it
-        gameThread = new Thread(this) {
-        };
+    protected void startGameThread() {
+        gameThread = new Thread(this);
         gameThread.start();
     }
 
-    public static void main(String[] args) {
-        System.out.println("Start of game");
-        Game game = new Game();
-        game.gameScreen.initInputs();
-        game.start();
-    }
 
     @Override
     public void run() {
@@ -91,9 +87,7 @@ public class Game extends JFrame implements Runnable {
                 updates = 0;
                 lastTimeCheck = System.currentTimeMillis();
             }
-
         }
-
     }
 
     private void createDefaultLvl() {
@@ -104,9 +98,9 @@ public class Game extends JFrame implements Runnable {
         LoadSave.CreateLevel("new_lvl", arr);
     }
 
-
     private void initClasses() {
-        render = new Render(this);
+        gameState = GameState.MENU;
+        gameRender = new GameRender(this);
         gameScreen = new GameScreen(this);
         tileManager = new TileManager();
 
@@ -114,31 +108,7 @@ public class Game extends JFrame implements Runnable {
         playing = new Playing(this);
         settings = new Settings(this);
         editing = new Editing(this);
+
     }
 
-    //getters and setters
-
-    public Render getRender() {
-        return render;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public Playing getPlaying() {
-        return playing;
-    }
-
-    public Settings getSettings() {
-        return settings;
-    }
-
-    public Editing getEditing() {
-        return editing;
-    }
-
-    public TileManager getTileManager() {
-        return tileManager;
-    }
 }

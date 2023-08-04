@@ -1,6 +1,6 @@
 package ui;
 
-import core.GameStates;
+import core.GameState;
 import helpz.LoadSave;
 import managers.TileManager;
 import objects.Tile;
@@ -71,7 +71,7 @@ public class EditingBar extends Bar {
     public void mouseClicked(int x, int y) {
 
         if (bMenu.getBounds().contains(x, y)) {
-            GameStates.setGameState(GameStates.MENU);
+            editing.getGame().setGameState(GameState.MENU);
 
         } else if (bSave.getBounds().contains(x, y)) {
             saveLevel();

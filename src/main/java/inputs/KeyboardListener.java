@@ -1,27 +1,25 @@
 package inputs;
 
 import core.Game;
-import core.GameStates;
+import core.GameState;
+import lombok.RequiredArgsConstructor;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+@RequiredArgsConstructor
 public class KeyboardListener implements KeyListener {
 
-    private Game game;
-
-    public KeyboardListener(Game game) {
-        this.game = game;
-    }
+    private final Game game;
 
     @Override
     public void keyTyped(KeyEvent e) {
-
+        //Temporary empty. Do nothing
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(GameStates.gameState == GameStates.EDIT){
+        if (game.getGameState() == GameState.EDIT) {
             game.getEditing().keyPressed(e);
         }
 
@@ -29,6 +27,6 @@ public class KeyboardListener implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        //Temporary empty. Do nothing
     }
 }

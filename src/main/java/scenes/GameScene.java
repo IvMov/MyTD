@@ -1,16 +1,15 @@
 package scenes;
 
 import core.Game;
+import lombok.Getter;
 
+@Getter
 public class GameScene {
 
-    private Game game;
+    protected Game game;
 
     public GameScene(Game game) {
         this.game = game;
     }
 
-    public Game getGame(){
-        return game;
-    }
 }

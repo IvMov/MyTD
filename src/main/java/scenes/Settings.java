@@ -1,7 +1,7 @@
 package scenes;
 
 import core.Game;
-import core.GameStates;
+import core.GameState;
 import ui.MyButton;
 
 import java.awt.*;
@@ -43,7 +43,7 @@ public class Settings extends GameScene implements SceneMethods {
     @Override
     public void mouseClicked(int x, int y) {
         if (bMenu.getBounds().contains(x, y)) {
-            GameStates.setGameState(GameStates.MENU);
+            game.setGameState(GameState.MENU);
         }
     }
 
