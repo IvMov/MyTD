@@ -43,8 +43,7 @@ public class LoadSave {
 
         if (lvlFile.exists()) {
             ArrayList<Integer> list = ReadFromFile(lvlFile);
-            return Utilz.ArrayLisTo2dInt(list, 20, 20);
-
+            return ArrayUtil.parseListToTwoDimArray(list, 20, 20);
         } else {
             System.out.println("File with name: " + name + " NOT exist");
             return null;
@@ -55,7 +54,7 @@ public class LoadSave {
         File lvlFile = new File("src/main/resources/" + name + ".txt");
 
         if(lvlFile.exists()){
-            writeToFile(lvlFile, Utilz.TwoDto1DintArr(idArr));
+            writeToFile(lvlFile, ArrayUtil.parseTwoDimArrayToOneDimArray(idArr));
         }else{
             System.out.println("File with name: " + name + " NOT exist");
         }
@@ -73,6 +72,7 @@ public class LoadSave {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+
         return list;
     }
 
@@ -88,6 +88,5 @@ public class LoadSave {
             throw new RuntimeException(e);
         }
     }
-
 
 }

@@ -1,15 +1,16 @@
-package com.ivmov.mytd.scenes;
+package com.ivmov.mytd.scenes.impl;
 
 import com.ivmov.mytd.core.Game;
 import com.ivmov.mytd.helper.LoadSave;
 import com.ivmov.mytd.objects.Tile;
+import com.ivmov.mytd.scenes.GameScene;
 import com.ivmov.mytd.ui.EditingBar;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-public class Editing extends GameScene implements SceneMethods {
+public class Editing extends GameScene {
 
     public final int ANIMATION_SPEED = 20; //more means slower!
 
@@ -37,7 +38,7 @@ public class Editing extends GameScene implements SceneMethods {
 
     @Override
     public void initButtons() {
-
+        //Temporary empty. Do nothing
     }
 
     @Override
@@ -57,7 +58,7 @@ public class Editing extends GameScene implements SceneMethods {
 
     @Override
     public void drawButtons(Graphics g) {
-
+        //Temporary empty. Do nothing
     }
 
     @Override
@@ -164,11 +165,11 @@ public class Editing extends GameScene implements SceneMethods {
     }
 
     private BufferedImage getSprite(int id) {
-        return getGame().getTileManager().getSprite(id);
+        return getGame().getTileManager().getSpriteById(id);
     }
 
     private BufferedImage getSprite(int id, int animationIndex) {
-        return getGame().getTileManager().getSpriteByIndex(id, animationIndex);
+        return getGame().getTileManager().getSpriteByIdAndIndex(id, animationIndex);
     }
 
     private void loadDefaultLvl() {

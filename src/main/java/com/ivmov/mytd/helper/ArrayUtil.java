@@ -2,9 +2,9 @@ package com.ivmov.mytd.helper;
 
 import java.util.ArrayList;
 
-public class Utilz {
+public class ArrayUtil {
 
-    public static int[][] ArrayLisTo2dInt(ArrayList<Integer> list, int ySize, int xSize) {
+    public static int[][] parseListToTwoDimArray(ArrayList<Integer> list, int ySize, int xSize) {
         int[][] newArray = new int[ySize][xSize];
 
         for (int j = 0; j < newArray.length; j++) {
@@ -13,10 +13,11 @@ public class Utilz {
                 newArray[j][i] = list.get(index);
             }
         }
+
         return newArray;
     }
 
-    public static int[] TwoDto1DintArr(int[][] twoArr) {
+    public static int[] parseTwoDimArrayToOneDimArray(int[][] twoArr) {
         int[] oneArr = new int[twoArr.length * twoArr[0].length];
         for (int j = 0; j < twoArr.length; j++) {
             for (int i = 0; i < twoArr[j].length; i++) {
@@ -24,6 +25,7 @@ public class Utilz {
                 oneArr[index] = twoArr[j][i];
             }
         }
+
         return oneArr;
     }
 

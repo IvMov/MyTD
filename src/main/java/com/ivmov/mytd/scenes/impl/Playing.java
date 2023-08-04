@@ -1,13 +1,18 @@
-package com.ivmov.mytd.scenes;
+package com.ivmov.mytd.scenes.impl;
 
 import com.ivmov.mytd.core.Game;
 import com.ivmov.mytd.helper.LoadSave;
+import com.ivmov.mytd.scenes.GameScene;
 import com.ivmov.mytd.ui.PlayingBar;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Playing extends GameScene implements SceneMethods {
+@Getter
+@Setter
+public class Playing extends GameScene {
 
     private int mouseX, mouseY; //will be used later
     private int[][] lvl;
@@ -19,9 +24,7 @@ public class Playing extends GameScene implements SceneMethods {
 
         loadDefaultLvl();
         playingBar = new PlayingBar(0, 640, 640, 100, this);
-
     }
-
 
     @Override
     public void render(Graphics g) {
@@ -31,10 +34,12 @@ public class Playing extends GameScene implements SceneMethods {
 
     @Override
     public void initButtons() {
+        //Temporary empty. Do nothing
     }
 
     @Override
     public void drawButtons(Graphics g) {
+        //Temporary empty. Do nothing
     }
 
     @Override
@@ -80,10 +85,9 @@ public class Playing extends GameScene implements SceneMethods {
 
     @Override
     public void mouseDragged(int x, int y) {
+        //Temporary empty. Do nothing
     }
 
-
-    //private methods
 
     private void drawPlayingBar(Graphics g) {
         playingBar.draw(g);
@@ -94,13 +98,7 @@ public class Playing extends GameScene implements SceneMethods {
     }
 
     private BufferedImage getSprite(int spriteId) {
-        return getGame().getTileManager().getSprite(spriteId);
+        return getGame().getTileManager().getSpriteById(spriteId);
     }
 
-    //getters and setters
-
-
-    public void setLvl(int[][] lvl) {
-        this.lvl = lvl;
-    }
 }

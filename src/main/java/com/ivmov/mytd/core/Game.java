@@ -4,10 +4,10 @@ import com.ivmov.mytd.helper.LoadSave;
 import lombok.Getter;
 import lombok.Setter;
 import com.ivmov.mytd.managers.TileManager;
-import com.ivmov.mytd.scenes.Editing;
-import com.ivmov.mytd.scenes.Menu;
-import com.ivmov.mytd.scenes.Playing;
-import com.ivmov.mytd.scenes.Settings;
+import com.ivmov.mytd.scenes.impl.Editing;
+import com.ivmov.mytd.scenes.impl.Menu;
+import com.ivmov.mytd.scenes.impl.Playing;
+import com.ivmov.mytd.scenes.impl.Settings;
 
 import javax.swing.*;
 

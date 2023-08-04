@@ -4,7 +4,7 @@ import com.ivmov.mytd.core.GameState;
 import com.ivmov.mytd.helper.LoadSave;
 import com.ivmov.mytd.managers.TileManager;
 import com.ivmov.mytd.objects.Tile;
-import com.ivmov.mytd.scenes.Editing;
+import com.ivmov.mytd.scenes.impl.Editing;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -77,11 +77,11 @@ public class EditingBar extends Bar {
             saveLevel();
 
         } else if (bWater.getBounds().contains(x, y)) {
-            selectedTile = takeTileManager().getTile(bWater.getId());
+            selectedTile = takeTileManager().getTileById(bWater.getId());
             editing.setSelectedTile(selectedTile);
 
         } else if (bGrass.getBounds().contains(x, y)) {
-            selectedTile = takeTileManager().getTile(bGrass.getId());
+            selectedTile = takeTileManager().getTileById(bGrass.getId());
             editing.setSelectedTile(selectedTile);
 
         } else {
@@ -95,7 +95,6 @@ public class EditingBar extends Bar {
                 }
             }
         }
-
     }
 
     public void mouseMoved(int x, int y) {
@@ -237,7 +236,7 @@ public class EditingBar extends Bar {
     }
 
     public BufferedImage getButtImg(int id) {
-        return takeTileManager().getSprite(id);
+        return takeTileManager().getSpriteById(id);
 
     }
 

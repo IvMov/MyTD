@@ -3,10 +3,14 @@ package com.ivmov.mytd.managers;
 import com.ivmov.mytd.helper.ImgFix;
 import com.ivmov.mytd.helper.LoadSave;
 import com.ivmov.mytd.objects.Tile;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+@Getter
+@Setter
 public class TileManager {
     //B-bottom, T- top, L - left, R - right, H-horizontal, V-vertical, C-corner, D - dot in corner
     public Tile GRASS;
@@ -38,52 +42,52 @@ public class TileManager {
         int id = 0;
 
         tiles.add(GRASS = new Tile(id++, "Grass",
-                getSprite(9, 0)));
+                getSpriteById(9, 0)));
         tiles.add(WATER = new Tile(id++, "Water",
                 getSpritesAnimationWater(0, 0)));
 
         roadsS.add(ROAD_H = new Tile(id++, "Road_H",
-                getSprite(8, 0)));
+                getSpriteById(8, 0)));
         roadsS.add(ROAD_V = new Tile(id++, "Road_V",
-                ImgFix.getRotateImg(getSprite(8, 0), 90)));
+                ImgFix.getRotateImg(getSpriteById(8, 0), 90)));
 
         roadsC.add(ROAD_TL_C = new Tile(id++, "Road_H",
-                getSprite(7, 0)));
+                getSpriteById(7, 0)));
         roadsC.add(ROAD_TR_C = new Tile(id++, "Road_V",
-                ImgFix.getRotateImg(getSprite(7, 0), 90)));
+                ImgFix.getRotateImg(getSpriteById(7, 0), 90)));
         roadsC.add(ROAD_BR_C = new Tile(id++, "Road_V",
-                ImgFix.getRotateImg(getSprite(7, 0), 180)));
+                ImgFix.getRotateImg(getSpriteById(7, 0), 180)));
         roadsC.add(ROAD_BL_C = new Tile(id++, "Road_V",
-                ImgFix.getRotateImg(getSprite(7, 0), 270)));
+                ImgFix.getRotateImg(getSpriteById(7, 0), 270)));
 
 
         waterLines.add(WATER_T = new Tile(id++, "Water_T_line",
-                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSprite(6, 0), 0)));
+                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSpriteById(6, 0), 0)));
         waterLines.add(WATER_R = new Tile(id++, "Water_R_line",
-                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSprite(6, 0), 90)));
+                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSpriteById(6, 0), 90)));
         waterLines.add(WATER_B = new Tile(id++, "Water_B_line",
-                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSprite(6, 0), 180)));
+                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSpriteById(6, 0), 180)));
         waterLines.add(WATER_L = new Tile(id++, "Water_L_line",
-                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSprite(6, 0), 270)));
+                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSpriteById(6, 0), 270)));
 
         waterC.add(WATER_BL_C = new Tile(id++, "Water_BL_corner",
-                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSprite(5, 0), 0)));
+                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSpriteById(5, 0), 0)));
         waterC.add(WATER_TL_C = new Tile(id++, "Water_TL_corner",
-                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSprite(5, 0), 90)));
+                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSpriteById(5, 0), 90)));
         waterC.add(WATER_TR_C = new Tile(id++, "Water_TR_corner",
-                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSprite(5, 0), 180)));
+                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSpriteById(5, 0), 180)));
         waterC.add(WATER_BR_C = new Tile(id++, "Water_BR_corner",
-                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSprite(5, 0), 270)));
+                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSpriteById(5, 0), 270)));
 
 
         waterD.add(WATER_TL_D = new Tile(id++, "Water_TL_dot",
-                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSprite(4, 0), 0)));
+                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSpriteById(4, 0), 0)));
         waterD.add(WATER_TR_D = new Tile(id++, "Water_TR_dot",
-                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSprite(4, 0), 90)));
+                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSpriteById(4, 0), 90)));
         waterD.add(WATER_BR_D = new Tile(id++, "Water_BR_dot",
-                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSprite(4, 0), 180)));
+                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSpriteById(4, 0), 180)));
         waterD.add(WATER_BL_D = new Tile(id++, "Water_BL_dot",
-                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSprite(4, 0), 270)));
+                ImgFix.buildAnimatedRotImgWater(getSpritesAnimationWater(0, 0), getSpriteById(4, 0), 270)));
 
         tiles.addAll(roadsS);
         tiles.addAll(roadsC);
@@ -93,56 +97,36 @@ public class TileManager {
     }
 
     //where x y - coordinates in sprite_atlas
-    private BufferedImage[] getImgs(int firstX, int firstY, int secondX, int secondY) {
-        return new BufferedImage[]{getSprite(firstX, firstY),
-                getSprite(secondX, secondY)};
+    private BufferedImage[] getImgsBy(int firstX, int firstY, int secondX, int secondY) {
+        return new BufferedImage[]{getSpriteById(firstX, firstY),
+                getSpriteById(secondX, secondY)};
     }
 
     private void loadAtlas() {
         atlas = LoadSave.getSpriteAtlas();
     }
 
-    private BufferedImage getSprite(int xCord, int yCord) {
+    private BufferedImage getSpriteById(int xCord, int yCord) {
         return atlas.getSubimage(xCord * 32, yCord * 32, 32, 32);
     }
 
     private BufferedImage[] getSpritesAnimationWater(int xCord, int yCord) {
         BufferedImage[] arr = new BufferedImage[4];
         for (int i = 0; i < 4; i++) {
-            arr[i] = getSprite(xCord + i, yCord);
+            arr[i] = getSpriteById(xCord + i, yCord);
         }
         return arr;
     }
 
-    public BufferedImage getSprite(int id) {
+    public BufferedImage getSpriteById(int id) {
         return tiles.get(id).getOneSprite();
     }
 
-    public BufferedImage getSpriteByIndex(int id, int animationIndex) {
+    public BufferedImage getSpriteByIdAndIndex(int id, int animationIndex) {
         return tiles.get(id).getSpriteByIndex(animationIndex);
     }
 
-    public Tile getTile(int id) {
+    public Tile getTileById(int id) {
         return tiles.get(id);
-    }
-
-    public ArrayList<Tile> getRoadsS() {
-        return roadsS;
-    }
-
-    public ArrayList<Tile> getRoadsC() {
-        return roadsC;
-    }
-
-    public ArrayList<Tile> getWaterC() {
-        return waterC;
-    }
-
-    public ArrayList<Tile> getWaterLines() {
-        return waterLines;
-    }
-
-    public ArrayList<Tile> getWaterD() {
-        return waterD;
     }
 }

@@ -4,7 +4,7 @@ import com.ivmov.mytd.core.Game;
 import lombok.Getter;
 
 @Getter
-public class GameScene {
+public abstract class GameScene implements SceneMethods{
 
     protected Game game;
 

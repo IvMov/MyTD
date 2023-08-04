@@ -13,11 +13,6 @@ public class KeyboardListener implements KeyListener {
     private final Game game;
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        //Temporary empty. Do nothing
-    }
-
-    @Override
     public void keyPressed(KeyEvent e) {
         if (game.getGameState() == GameState.EDIT) {
             game.getEditing().keyPressed(e);
@@ -27,6 +22,11 @@ public class KeyboardListener implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        //Temporary empty. Do nothing
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
         //Temporary empty. Do nothing
     }
 }

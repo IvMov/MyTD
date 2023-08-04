@@ -2,7 +2,7 @@ package com.ivmov.mytd.ui;
 
 import com.ivmov.mytd.core.GameState;
 import lombok.Getter;
-import com.ivmov.mytd.scenes.Playing;
+import com.ivmov.mytd.scenes.impl.Playing;
 
 import java.awt.*;
 

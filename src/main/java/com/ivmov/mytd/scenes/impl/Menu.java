@@ -1,21 +1,18 @@
-package com.ivmov.mytd.scenes;
+package com.ivmov.mytd.scenes.impl;
 
 import com.ivmov.mytd.core.Game;
 import com.ivmov.mytd.core.GameState;
+import com.ivmov.mytd.scenes.GameScene;
 import com.ivmov.mytd.ui.MyButton;
 
 import java.awt.*;
-import java.util.Random;
 
-public class Menu extends GameScene implements SceneMethods {
+public class Menu extends GameScene {
 
-    private Random random;
     private MyButton bPlaying, bEditing, bSettings, bQuit;
-
 
     public Menu(Game game) {
         super(game);
-        random = new Random();
         initButtons();
     }
 
@@ -119,10 +116,6 @@ public class Menu extends GameScene implements SceneMethods {
         bEditing.resetBooleans();
         bSettings.resetBooleans();
         bQuit.resetBooleans();
-    }
-
-    private int getRandomInt() {
-        return random.nextInt(100);
     }
 
 }

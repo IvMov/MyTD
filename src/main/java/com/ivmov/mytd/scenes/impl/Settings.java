@@ -1,21 +1,20 @@
-package com.ivmov.mytd.scenes;
+package com.ivmov.mytd.scenes.impl;
 
 import com.ivmov.mytd.core.Game;
 import com.ivmov.mytd.core.GameState;
+import com.ivmov.mytd.scenes.GameScene;
 import com.ivmov.mytd.ui.MyButton;
 
 import java.awt.*;
 
-public class Settings extends GameScene implements SceneMethods {
+public class Settings extends GameScene {
 
     private MyButton bMenu;
-
 
     public Settings(Game game) {
         super(game);
         initButtons();
     }
-
 
     @Override
     public void initButtons() {
@@ -39,7 +38,6 @@ public class Settings extends GameScene implements SceneMethods {
         drawButtons(g);
     }
 
-    //mouse events
     @Override
     public void mouseClicked(int x, int y) {
         if (bMenu.getBounds().contains(x, y)) {
@@ -64,7 +62,7 @@ public class Settings extends GameScene implements SceneMethods {
 
     @Override
     public void mouseDragged(int x, int y) {
-
+        //Temporary empty. Do nothing
     }
 
 }
