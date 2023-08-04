@@ -22,6 +22,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 case EDIT -> game.getEditing().mouseClicked(e.getX(), e.getY());
             }
         }
+        System.out.println("Click " +e.getButton() + ": [x: " + e.getX() + ", y: " + e.getY());
     }
 
     @Override

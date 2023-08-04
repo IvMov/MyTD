@@ -2,6 +2,7 @@ package com.ivmov.mytd.scenes.impl;
 
 import com.ivmov.mytd.core.Game;
 import com.ivmov.mytd.helper.LoadSave;
+import com.ivmov.mytd.managers.EnemyManager;
 import com.ivmov.mytd.managers.TileManager;
 import com.ivmov.mytd.scenes.GameScene;
 import com.ivmov.mytd.ui.impl.PlayingBar;
@@ -17,21 +18,27 @@ public class Playing extends GameScene {
     private int mouseX, mouseY; //will be used later
     private int[][] lvl;
     private PlayingBar playingBar;
-
+    private EnemyManager enemyManager;
 
     public Playing(Game game, TileManager tileManager) {
         super(game, tileManager);
-
         loadDefaultLvl();
         playingBar = new PlayingBar(0, 640, 640, 100, this);
+        enemyManager = new EnemyManager(this);
+    }
+
+    public void update() {
+        enemyManager.update();
     }
 
     @Override
     public void render(Graphics g) {
         updateWaterTick();
+        update();
 
         drawContent(g);
         drawPlayingBar(g);
+        enemyManager.draw(g);
     }
 
     @Override
@@ -64,6 +71,8 @@ public class Playing extends GameScene {
     public void mouseClicked(int x, int y) {
         if (y >= 640) {
             playingBar.mouseClicked(x, y);
+        } else {
+            enemyManager.addEnemy(x, y);
         }
     }
 
