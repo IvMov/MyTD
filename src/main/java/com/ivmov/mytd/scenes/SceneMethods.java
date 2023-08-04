@@ -1,4 +1,4 @@
-package scenes;
+package com.ivmov.mytd.scenes;
 
 import java.awt.*;
 

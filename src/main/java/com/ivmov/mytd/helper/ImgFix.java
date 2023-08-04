@@ -1,4 +1,4 @@
-package helpz;
+package com.ivmov.mytd.helper;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,7 +12,7 @@ public class ImgFix {
 
         BufferedImage newImg = new BufferedImage(w, h, img.getType());
 
-        Graphics2D g2d = newImg.createGraphics(); // used like graphics (extends it) but more for work with 2d objects
+        Graphics2D g2d = newImg.createGraphics(); // used like graphics (extends it) but more for work with 2d com.ivmov.td.objects
 
         g2d.rotate(Math.toRadians(rotationAngle), w / 2, h / 2); //what if 31?
         g2d.drawImage(img, 0, 0, null); //draw newImg on top of old img

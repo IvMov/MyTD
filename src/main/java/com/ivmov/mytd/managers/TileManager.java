@@ -1,8 +1,8 @@
-package managers;
+package com.ivmov.mytd.managers;
 
-import helpz.ImgFix;
-import helpz.LoadSave;
-import objects.Tile;
+import com.ivmov.mytd.helper.ImgFix;
+import com.ivmov.mytd.helper.LoadSave;
+import com.ivmov.mytd.objects.Tile;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

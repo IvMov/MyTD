@@ -1,6 +1,6 @@
-package scenes;
+package com.ivmov.mytd.scenes;
 
-import core.Game;
+import com.ivmov.mytd.core.Game;
 import lombok.Getter;
 
 @Getter

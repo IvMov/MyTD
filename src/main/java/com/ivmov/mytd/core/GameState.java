@@ -1,4 +1,4 @@
-package core;
+package com.ivmov.mytd.core;
 
 public enum GameState {
 

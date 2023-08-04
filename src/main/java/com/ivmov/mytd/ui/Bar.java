@@ -1,7 +1,7 @@
-package ui;
+package com.ivmov.mytd.ui;
 
 
-import core.Game;
+import com.ivmov.mytd.core.Game;
 
 public class Bar {
 

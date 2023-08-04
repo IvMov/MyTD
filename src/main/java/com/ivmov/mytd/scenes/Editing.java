@@ -1,9 +1,9 @@
-package scenes;
+package com.ivmov.mytd.scenes;
 
-import core.Game;
-import helpz.LoadSave;
-import objects.Tile;
-import ui.EditingBar;
+import com.ivmov.mytd.core.Game;
+import com.ivmov.mytd.helper.LoadSave;
+import com.ivmov.mytd.objects.Tile;
+import com.ivmov.mytd.ui.EditingBar;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

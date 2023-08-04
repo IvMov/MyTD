@@ -1,8 +1,8 @@
-package scenes;
+package com.ivmov.mytd.scenes;
 
-import core.Game;
-import core.GameState;
-import ui.MyButton;
+import com.ivmov.mytd.core.Game;
+import com.ivmov.mytd.core.GameState;
+import com.ivmov.mytd.ui.MyButton;
 
 import java.awt.*;
 import java.util.Random;

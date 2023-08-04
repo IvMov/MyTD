@@ -1,9 +1,8 @@
-package ui;
+package com.ivmov.mytd.ui;
 
-import core.GameState;
+import com.ivmov.mytd.core.GameState;
 import lombok.Getter;
-import managers.TileManager;
-import scenes.Playing;
+import com.ivmov.mytd.scenes.Playing;
 
 import java.awt.*;
 

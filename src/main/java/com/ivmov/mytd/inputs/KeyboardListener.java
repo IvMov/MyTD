@@ -1,7 +1,7 @@
-package inputs;
+package com.ivmov.mytd.inputs;
 
-import core.Game;
-import core.GameState;
+import com.ivmov.mytd.core.Game;
+import com.ivmov.mytd.core.GameState;
 import lombok.RequiredArgsConstructor;
 
 import java.awt.event.KeyEvent;

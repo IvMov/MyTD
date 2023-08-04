@@ -1,4 +1,4 @@
-package ui;
+package com.ivmov.mytd.ui;
 
 import java.awt.*;
 

@@ -1,4 +1,4 @@
-package objects;
+package com.ivmov.mytd.objects;
 
 import java.awt.image.BufferedImage;
 

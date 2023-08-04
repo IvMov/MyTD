@@ -1,4 +1,6 @@
-import core.Game;
+package com.ivmov.mytd;
+
+import com.ivmov.mytd.core.Game;
 
 public class GameRunner {
 

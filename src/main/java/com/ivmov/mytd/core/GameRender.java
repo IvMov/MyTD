@@ -1,4 +1,4 @@
-package core;
+package com.ivmov.mytd.core;
 
 import lombok.AllArgsConstructor;
 

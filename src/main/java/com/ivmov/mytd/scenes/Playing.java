@@ -1,8 +1,8 @@
-package scenes;
+package com.ivmov.mytd.scenes;
 
-import core.Game;
-import helpz.LoadSave;
-import ui.PlayingBar;
+import com.ivmov.mytd.core.Game;
+import com.ivmov.mytd.helper.LoadSave;
+import com.ivmov.mytd.ui.PlayingBar;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

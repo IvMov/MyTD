@@ -1,7 +1,7 @@
-package core;
+package com.ivmov.mytd.core;
 
-import inputs.KeyboardListener;
-import inputs.MyMouseListener;
+import com.ivmov.mytd.inputs.KeyboardListener;
+import com.ivmov.mytd.inputs.MyMouseListener;
 import lombok.Getter;
 import lombok.Setter;
 

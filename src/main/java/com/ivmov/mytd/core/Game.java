@@ -1,13 +1,13 @@
-package core;
+package com.ivmov.mytd.core;
 
-import helpz.LoadSave;
+import com.ivmov.mytd.helper.LoadSave;
 import lombok.Getter;
 import lombok.Setter;
-import managers.TileManager;
-import scenes.Editing;
-import scenes.Menu;
-import scenes.Playing;
-import scenes.Settings;
+import com.ivmov.mytd.managers.TileManager;
+import com.ivmov.mytd.scenes.Editing;
+import com.ivmov.mytd.scenes.Menu;
+import com.ivmov.mytd.scenes.Playing;
+import com.ivmov.mytd.scenes.Settings;
 
 import javax.swing.*;
 
@@ -92,9 +92,6 @@ public class Game extends JFrame implements Runnable {
 
     private void createDefaultLvl() {
         int[] arr = new int[400];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = 0;
-        }
         LoadSave.CreateLevel("new_lvl", arr);
     }
 

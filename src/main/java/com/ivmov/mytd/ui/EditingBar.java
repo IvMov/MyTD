@@ -1,10 +1,10 @@
-package ui;
+package com.ivmov.mytd.ui;
 
-import core.GameState;
-import helpz.LoadSave;
-import managers.TileManager;
-import objects.Tile;
-import scenes.Editing;
+import com.ivmov.mytd.core.GameState;
+import com.ivmov.mytd.helper.LoadSave;
+import com.ivmov.mytd.managers.TileManager;
+import com.ivmov.mytd.objects.Tile;
+import com.ivmov.mytd.scenes.Editing;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
