@@ -2,17 +2,15 @@ package com.ivmov.mytd.scenes.impl;
 
 import com.ivmov.mytd.core.Game;
 import com.ivmov.mytd.helper.LoadSave;
+import com.ivmov.mytd.managers.TileManager;
 import com.ivmov.mytd.objects.Tile;
 import com.ivmov.mytd.scenes.GameScene;
-import com.ivmov.mytd.ui.EditingBar;
+import com.ivmov.mytd.ui.impl.EditingBar;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 
 public class Editing extends GameScene {
-
-    public final int ANIMATION_SPEED = 20; //more means slower!
 
     private boolean drawSelect;
     private int mouseX, mouseY;
@@ -21,12 +19,10 @@ public class Editing extends GameScene {
     private Tile selectedTile;
     private final EditingBar editingBar;
 
-    private int animationIndex;
-    private int tick;
 
 
-    public Editing(Game game) {
-        super(game);
+    public Editing(Game game, TileManager tileManager) {
+        super(game, tileManager);
         loadDefaultLvl();
         editingBar = new EditingBar(0, 640, 640, 100, this);
     }
@@ -46,10 +42,10 @@ public class Editing extends GameScene {
         for (int y = 0; y < lvl.length; y++) {
             for (int x = 0; x < lvl[y].length; x++) {
                 int id = lvl[y][x];
-                if (isAnimation(id)) {
-                    g.drawImage(getSprite(id, animationIndex), x * 32, y * 32, null);
+                if (tileManager.isSpriteAnimation(id)) {
+                    g.drawImage(tileManager.getSpriteByIdAndIndex(id, animationIndex), x * 32, y * 32, null);
                 } else {
-                    g.drawImage(getSprite(id), x * 32, y * 32, null);
+                    g.drawImage(tileManager.getSpriteById(id), x * 32, y * 32, null);
                 }
             }
         }
@@ -63,22 +59,11 @@ public class Editing extends GameScene {
 
     @Override
     public void render(Graphics g) {
-        updateTick();
+        updateWaterTick();
 
         drawContent(g);
         drawEditingBar(g);
         drawSelectedTile(g);
-    }
-
-    private void updateTick() {
-        tick++;
-        if (tick >= ANIMATION_SPEED) { //used to do faster/slower animation
-            tick = 0;
-            animationIndex++;
-            if (animationIndex >= 4) {
-                animationIndex = 0;
-            }
-        }
     }
 
 
@@ -131,10 +116,6 @@ public class Editing extends GameScene {
         }
     }
 
-    private boolean isAnimation(int spriteId) {
-        return getGame().getTileManager().isSpriteAnimation(spriteId);
-    }
-
     private void drawEditingBar(Graphics g) {
         editingBar.draw(g);
     }
@@ -162,14 +143,6 @@ public class Editing extends GameScene {
             lastTileId = selectedTile.getId();
             lvl[tileY][tileX] = selectedTile.getId();
         }
-    }
-
-    private BufferedImage getSprite(int id) {
-        return getGame().getTileManager().getSpriteById(id);
-    }
-
-    private BufferedImage getSprite(int id, int animationIndex) {
-        return getGame().getTileManager().getSpriteByIdAndIndex(id, animationIndex);
     }
 
     private void loadDefaultLvl() {

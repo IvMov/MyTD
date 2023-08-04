@@ -1,10 +1,10 @@
-package com.ivmov.mytd.ui;
+package com.ivmov.mytd.ui.impl;
 
 import com.ivmov.mytd.core.GameState;
 import com.ivmov.mytd.helper.LoadSave;
-import com.ivmov.mytd.managers.TileManager;
 import com.ivmov.mytd.objects.Tile;
 import com.ivmov.mytd.scenes.impl.Editing;
+import com.ivmov.mytd.ui.BarElement;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,19 +12,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditingBar extends Bar {
+public class EditingBar extends BarElement {
 
     private int currentIndex;
 
     private int[][] lvl;
 
-    private MyButton bMenu, bSave;
-    private MyButton bCurrent, bGrass, bWater;
+    private CommonButton bMenu, bSave;
+    private CommonButton bCurrent, bGrass, bWater;
 
     private Editing editing;
     private Tile selectedTile;
 
-    private Map<MyButton, ArrayList<Tile>> buttonsHashMap = new HashMap<>();
+    private Map<CommonButton, ArrayList<Tile>> buttonsHashMap = new HashMap<>();
 
 
     public EditingBar(int xStart, int yStart, int width, int height, Editing editing) {
@@ -77,15 +77,15 @@ public class EditingBar extends Bar {
             saveLevel();
 
         } else if (bWater.getBounds().contains(x, y)) {
-            selectedTile = takeTileManager().getTileById(bWater.getId());
+            selectedTile = editing.getGame().getTileManager().getTileById(bWater.getId());
             editing.setSelectedTile(selectedTile);
 
         } else if (bGrass.getBounds().contains(x, y)) {
-            selectedTile = takeTileManager().getTileById(bGrass.getId());
+            selectedTile = editing.getGame().getTileManager().getTileById(bGrass.getId());
             editing.setSelectedTile(selectedTile);
 
         } else {
-            for (MyButton b : buttonsHashMap.keySet()) {
+            for (CommonButton b : buttonsHashMap.keySet()) {
                 if (b.getBounds().contains(x, y)) {
                     selectedTile = buttonsHashMap.get(b).get(0);
                     editing.setSelectedTile(selectedTile);
@@ -104,7 +104,7 @@ public class EditingBar extends Bar {
         bGrass.setMouseOver(bGrass.getBounds().contains(x, y));
         bWater.setMouseOver(bWater.getBounds().contains(x, y));
 
-        for (MyButton b : buttonsHashMap.keySet()) {
+        for (CommonButton b : buttonsHashMap.keySet()) {
             b.setMouseOver(b.getBounds().contains(x, y));
         }
     }
@@ -116,7 +116,7 @@ public class EditingBar extends Bar {
         bGrass.setMousePressed(bGrass.getBounds().contains(x, y));
         bWater.setMousePressed(bWater.getBounds().contains(x, y));
 
-        for (MyButton b : buttonsHashMap.keySet()) {
+        for (CommonButton b : buttonsHashMap.keySet()) {
             b.setMousePressed(b.getBounds().contains(x, y));
         }
     }
@@ -128,7 +128,7 @@ public class EditingBar extends Bar {
         bGrass.resetBooleans();
         bWater.resetBooleans();
 
-        for (MyButton b : buttonsHashMap.keySet()) {
+        for (CommonButton b : buttonsHashMap.keySet()) {
             b.resetBooleans();
         }
 
@@ -137,9 +137,9 @@ public class EditingBar extends Bar {
 
     private void drawHashMapButtons(Graphics g) {
 
-        for (Map.Entry<MyButton, ArrayList<Tile>> entry : buttonsHashMap.entrySet()) {
+        for (Map.Entry<CommonButton, ArrayList<Tile>> entry : buttonsHashMap.entrySet()) {
 
-            MyButton b = entry.getKey();
+            CommonButton b = entry.getKey();
             BufferedImage img = entry.getValue().get(0).getOneSprite();
 
             int x = b.getBounds().x;
@@ -170,8 +170,8 @@ public class EditingBar extends Bar {
     }
 
     private void initNavButtons() {
-        bMenu = new MyButton(2, 642, 120, 120 / 3, "Menu");
-        bSave = new MyButton(560, 642, 78, 30, "Save");
+        bMenu = new CommonButton(2, 642, 120, 120 / 3, "Menu");
+        bSave = new CommonButton(560, 642, 78, 30, "Save");
     }
 
     private void initTileButtons() {
@@ -183,8 +183,8 @@ public class EditingBar extends Bar {
         int xOffset = (int) (width * 1.1f);
         int i = 0;
 
-        bGrass = new MyButton(i++, xPosition, yPosition, width, height, "Grass");
-        bWater = new MyButton(i++, xPosition + xOffset, yPosition, width, height, "Water");
+        bGrass = new CommonButton(i++, xPosition, yPosition, width, height, "Grass");
+        bWater = new CommonButton(i++, xPosition + xOffset, yPosition, width, height, "Water");
 
         initHashMapForButton(editing.getGame().getTileManager().getRoadsS(), xPosition, yPosition, xOffset, width, height, i++);
         initHashMapForButton(editing.getGame().getTileManager().getRoadsC(), xPosition, yPosition, xOffset, width, height, i++);
@@ -195,12 +195,12 @@ public class EditingBar extends Bar {
     }
 
     private void initHashMapForButton(ArrayList<Tile> list, int x, int y, int xOff, int w, int h, int id) {
-        MyButton b = new MyButton(id, x + xOff * id, y, w, h, "");
+        CommonButton b = new CommonButton(id, x + xOff * id, y, w, h, "");
         buttonsHashMap.put(b, list);
 
     }
 
-    private void drawSingleButton(Graphics g, MyButton b) {
+    private void drawSingleButton(Graphics g, CommonButton b) {
 
         int x = b.getBounds().x;
         int y = b.getBounds().y;
@@ -212,7 +212,7 @@ public class EditingBar extends Bar {
         drawButtonEvents(g, b, x, y, w, h);
     }
 
-    private void drawButtonEvents(Graphics g, MyButton b, int x, int y, int w, int h) {
+    private void drawButtonEvents(Graphics g, CommonButton b, int x, int y, int w, int h) {
 
         //set borders
         g.setColor(Color.black);
@@ -236,12 +236,7 @@ public class EditingBar extends Bar {
     }
 
     public BufferedImage getButtImg(int id) {
-        return takeTileManager().getSpriteById(id);
-
-    }
-
-    private TileManager takeTileManager() {
-        return editing.getGame().getTileManager();
+        return editing.getGame().getTileManager().getSpriteById(id);
     }
 
 }

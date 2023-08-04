@@ -1,16 +1,17 @@
-package com.ivmov.mytd.ui;
+package com.ivmov.mytd.ui.impl;
 
 import com.ivmov.mytd.core.GameState;
+import com.ivmov.mytd.ui.BarElement;
 import lombok.Getter;
 import com.ivmov.mytd.scenes.impl.Playing;
 
 import java.awt.*;
 
 @Getter
-public class PlayingBar extends Bar{
+public class PlayingBar extends BarElement {
 
-    private MyButton bMenu;
-    private Playing playing;
+    private CommonButton bMenu;
+    private final Playing playing;
 
     public PlayingBar(int x, int y, int width, int height, Playing playing) {
         super(x, y, width, height);
@@ -20,7 +21,7 @@ public class PlayingBar extends Bar{
     }
 
     public void initButtons() {
-        bMenu = new MyButton(2, 642, 120, 120 / 3, "Menu");
+        bMenu = new CommonButton(2, 642, 120, 120 / 3, "Menu");
     }
 
     public void draw(Graphics g) {

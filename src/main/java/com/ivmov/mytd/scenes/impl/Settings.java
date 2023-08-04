@@ -2,23 +2,24 @@ package com.ivmov.mytd.scenes.impl;
 
 import com.ivmov.mytd.core.Game;
 import com.ivmov.mytd.core.GameState;
+import com.ivmov.mytd.managers.TileManager;
 import com.ivmov.mytd.scenes.GameScene;
-import com.ivmov.mytd.ui.MyButton;
+import com.ivmov.mytd.ui.impl.CommonButton;
 
 import java.awt.*;
 
 public class Settings extends GameScene {
 
-    private MyButton bMenu;
+    private CommonButton bMenu;
 
-    public Settings(Game game) {
-        super(game);
+    public Settings(Game game, TileManager tileManager) {
+        super(game, tileManager);
         initButtons();
     }
 
     @Override
     public void initButtons() {
-        bMenu = new MyButton(5, 5, 120, 120 / 3, "Menu");
+        bMenu = new CommonButton(5, 5, 120, 120 / 3, "Menu");
     }
 
     @Override

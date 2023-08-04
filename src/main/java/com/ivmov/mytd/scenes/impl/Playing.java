@@ -2,13 +2,13 @@ package com.ivmov.mytd.scenes.impl;
 
 import com.ivmov.mytd.core.Game;
 import com.ivmov.mytd.helper.LoadSave;
+import com.ivmov.mytd.managers.TileManager;
 import com.ivmov.mytd.scenes.GameScene;
-import com.ivmov.mytd.ui.PlayingBar;
+import com.ivmov.mytd.ui.impl.PlayingBar;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 @Getter
 @Setter
@@ -19,8 +19,8 @@ public class Playing extends GameScene {
     private PlayingBar playingBar;
 
 
-    public Playing(Game game) {
-        super(game);
+    public Playing(Game game, TileManager tileManager) {
+        super(game, tileManager);
 
         loadDefaultLvl();
         playingBar = new PlayingBar(0, 640, 640, 100, this);
@@ -28,6 +28,8 @@ public class Playing extends GameScene {
 
     @Override
     public void render(Graphics g) {
+        updateWaterTick();
+
         drawContent(g);
         drawPlayingBar(g);
     }
@@ -47,7 +49,11 @@ public class Playing extends GameScene {
         for (int y = 0; y < lvl.length; y++) {
             for (int x = 0; x < lvl[y].length; x++) {
                 int id = lvl[y][x];
-                g.drawImage(getSprite(id), x * 32, y * 32, null);
+                if (tileManager.isSpriteAnimation(id)) {
+                    g.drawImage(tileManager.getSpriteByIdAndIndex(id, animationIndex), x * 32, y * 32, null);
+                } else {
+                    g.drawImage(tileManager.getSpriteById(id), x * 32, y * 32, null);
+                }
             }
         }
     }
@@ -95,10 +101,6 @@ public class Playing extends GameScene {
 
     private void loadDefaultLvl() {
         lvl = LoadSave.GetLevelData("new_lvl");
-    }
-
-    private BufferedImage getSprite(int spriteId) {
-        return getGame().getTileManager().getSpriteById(spriteId);
     }
 
 }

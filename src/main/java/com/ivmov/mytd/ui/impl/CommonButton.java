@@ -1,8 +1,13 @@
-package com.ivmov.mytd.ui;
+package com.ivmov.mytd.ui.impl;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import java.awt.*;
 
-public class MyButton {
+@Getter
+@Setter
+public class CommonButton {
 
     private int id;
     private int x, y, width, height;
@@ -13,23 +18,23 @@ public class MyButton {
     private Rectangle bounds;
 
     //constructor for common buttons
-    public MyButton(int x, int y, int width, int height, String text) {
+    public CommonButton(int x, int y, int width, int height, String text) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.text = text;
-        this.id = -1; //its for (when loop - to except nullpointer - interesting)
+        this.id = -1; //it's for (when loop - to except nullpointer - interesting)
         initBounds();
     }
 
     //constructor for buttons with id (tile buttons)
-    public MyButton(int id,
-                    int x,
-                    int y,
-                    int width,
-                    int height,
-                    String text) {
+    public CommonButton(int id,
+                        int x,
+                        int y,
+                        int width,
+                        int height,
+                        String text) {
         this.id = id;
         this.x = x;
         this.y = y;
@@ -39,18 +44,9 @@ public class MyButton {
         initBounds();
     }
 
-    private void initBounds() {
-        this.bounds = new Rectangle(x, y, width, height);
-    }
-
     public void draw(Graphics g) {
-        //body
         drawBody(g);
-
-        //border
         drawBorder(g);
-
-        //text
         drawText(g);
     }
 
@@ -72,11 +68,7 @@ public class MyButton {
     }
 
     private void drawBody(Graphics g) {
-        if (mouseOver) {
-            g.setColor(Color.gray);
-        } else {
-            g.setColor(Color.white);
-        }
+        g.setColor(mouseOver ? Color.gray: Color.pink);
 
         g.fillRect(x, y, width, height);
     }
@@ -84,31 +76,11 @@ public class MyButton {
     private void drawText(Graphics g) {
         int w = g.getFontMetrics().stringWidth(text);
         int h = g.getFontMetrics().getHeight();
-        g.drawString(text, x + width / 2 - w / 2, y + h / 2 + height / 2);
+        g.drawString(text, x + width / 2 - w / 2, y + height / 2 + h/3);
     }
 
-
-    public Rectangle getBounds() {
-        return bounds;
+    private void initBounds() {
+        this.bounds = new Rectangle(x, y, width, height);
     }
 
-    public void setMousePressed(boolean mousePressed) {
-        this.mousePressed = mousePressed;
-    }
-
-    public void setMouseOver(boolean mouseOver) {
-        this.mouseOver = mouseOver;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public boolean isMouseOver() {
-        return mouseOver;
-    }
-
-    public boolean isMousePressed() {
-        return mousePressed;
-    }
 }

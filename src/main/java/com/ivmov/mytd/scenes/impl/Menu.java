@@ -2,17 +2,18 @@ package com.ivmov.mytd.scenes.impl;
 
 import com.ivmov.mytd.core.Game;
 import com.ivmov.mytd.core.GameState;
+import com.ivmov.mytd.managers.TileManager;
 import com.ivmov.mytd.scenes.GameScene;
-import com.ivmov.mytd.ui.MyButton;
+import com.ivmov.mytd.ui.impl.CommonButton;
 
 import java.awt.*;
 
 public class Menu extends GameScene {
 
-    private MyButton bPlaying, bEditing, bSettings, bQuit;
+    private CommonButton bPlaying, bEditing, bSettings, bQuit;
 
-    public Menu(Game game) {
-        super(game);
+    public Menu(Game game, TileManager tileManager) {
+        super(game, tileManager);
         initButtons();
     }
 
@@ -24,10 +25,10 @@ public class Menu extends GameScene {
         int x = 640 / 2 - w / 2;
         int y = 150;
         int yOffset = 70;
-        bPlaying = new MyButton(x, y, w, h, "Play");
-        bEditing = new MyButton(x, y + yOffset, w, h, "Edit level");
-        bSettings = new MyButton(x, y + yOffset * 2, w, h, "Settings");
-        bQuit = new MyButton(x, y + yOffset * 3, w, h, "Quit");
+        bPlaying = new CommonButton(x, y, w, h, "Play");
+        bEditing = new CommonButton(x, y + yOffset, w, h, "Edit level");
+        bSettings = new CommonButton(x, y + yOffset * 2, w, h, "Settings");
+        bQuit = new CommonButton(x, y + yOffset * 3, w, h, "Quit");
     }
 
     @Override

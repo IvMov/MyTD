@@ -101,10 +101,10 @@ public class Game extends JFrame implements Runnable {
         gameScreen = new GameScreen(this);
         tileManager = new TileManager();
 
-        menu = new Menu(this);
-        playing = new Playing(this);
-        settings = new Settings(this);
-        editing = new Editing(this);
+        menu = new Menu(this, tileManager);
+        playing = new Playing(this, tileManager);
+        settings = new Settings(this, tileManager);
+        editing = new Editing(this, tileManager);
     }
 
 }

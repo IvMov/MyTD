@@ -6,19 +6,19 @@ public class Tile {
 
     private int id;
     private String name;
-    private BufferedImage[] sprite;
+    private BufferedImage[] sprites;
 
-    public Tile(int id, String name, BufferedImage sprite) {
+    public Tile(int id, String name, BufferedImage sprites) {
         this.id = id;
         this.name = name;
-        this.sprite = new BufferedImage[1];
-        this.sprite[0] = sprite;
+        this.sprites = new BufferedImage[1];
+        this.sprites[0] = sprites;
     }
 
-    public Tile(int id, String name, BufferedImage[] sprite) {
+    public Tile(int id, String name, BufferedImage[] sprites) {
         this.id = id;
         this.name = name;
-        this.sprite = sprite;
+        this.sprites = sprites;
     }
 
     public int getId() {
@@ -30,15 +30,15 @@ public class Tile {
     }
 
     public BufferedImage getOneSprite() {
-        return sprite[0];
+        return sprites[0];
     }
 
     public BufferedImage getSpriteByIndex(int animationIndex) {
-        return sprite[animationIndex];
+        return sprites[animationIndex];
     }
 
     public boolean isAnimation() {
-        return sprite.length > 1;
+        return sprites.length > 1;
     }
 
 }

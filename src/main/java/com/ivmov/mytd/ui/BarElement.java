@@ -1,14 +1,10 @@
 package com.ivmov.mytd.ui;
 
-
-import com.ivmov.mytd.core.Game;
-
-public class Bar {
+public class BarElement {
 
     protected int xStart, yStart, width, height;
-    protected Game game;
 
-    public Bar(int xStart, int y, int width, int height) {
+    public BarElement(int xStart, int y, int width, int height) {
         this.xStart = xStart;
         this.yStart = y;
         this.width = width;
