@@ -16,6 +16,7 @@ public class Enemy {
     private int type;
     private BufferedImage sprite;
     private Rectangle bounds;
+    private EnemyDirection direction = EnemyDirection.RIGHT;
 
     public Enemy(float x, float y, BufferedImage sprite, int type) {
         id++;
@@ -25,8 +26,13 @@ public class Enemy {
         this.type = type;
     }
 
-    public void move(float x, float y) {
-        this.x += x;
-        this.y += y;
+    public void move(float speed, EnemyDirection enemyDirection) {
+        switch (enemyDirection) {
+            case LEFT -> this.x-= speed;
+            case RIGHT -> this.x+= speed;
+            case DOWN -> this.y+= speed;
+            case UP -> this.y-= speed;
+        }
+
     }
 }

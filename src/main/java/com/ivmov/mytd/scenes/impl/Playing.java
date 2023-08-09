@@ -24,11 +24,15 @@ public class Playing extends GameScene {
         super(game, tileManager);
         loadDefaultLvl();
         playingBar = new PlayingBar(0, 640, 640, 100, this);
-        enemyManager = new EnemyManager(this);
+        enemyManager = new EnemyManager(this, tileManager);
     }
 
     public void update() {
         enemyManager.update();
+    }
+
+    public int getTileIdByCoordinates(int y, int x) {
+        return lvl[y/32][x/32];
     }
 
     @Override
@@ -59,7 +63,7 @@ public class Playing extends GameScene {
                 if (tileManager.isSpriteAnimation(id)) {
                     g.drawImage(tileManager.getSpriteByIdAndIndex(id, animationIndex), x * 32, y * 32, null);
                 } else {
-                    g.drawImage(tileManager.getSpriteById(id), x * 32, y * 32, null);
+                    g.drawImage(tileManager.getSpriteByCoordinate(id), x * 32, y * 32, null);
                 }
             }
         }

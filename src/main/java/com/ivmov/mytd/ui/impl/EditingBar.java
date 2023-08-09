@@ -236,7 +236,7 @@ public class EditingBar extends BarElement {
     }
 
     public BufferedImage getButtImg(int id) {
-        return editing.getGame().getTileManager().getSpriteById(id);
+        return editing.getGame().getTileManager().getSpriteByCoordinate(id);
     }
 
 }

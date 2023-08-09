@@ -45,7 +45,7 @@ public class Editing extends GameScene {
                 if (tileManager.isSpriteAnimation(id)) {
                     g.drawImage(tileManager.getSpriteByIdAndIndex(id, animationIndex), x * 32, y * 32, null);
                 } else {
-                    g.drawImage(tileManager.getSpriteById(id), x * 32, y * 32, null);
+                    g.drawImage(tileManager.getSpriteByCoordinate(id), x * 32, y * 32, null);
                 }
             }
         }
