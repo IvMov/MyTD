@@ -32,7 +32,11 @@ public class Playing extends GameScene {
     }
 
     public int getTileIdByCoordinates(int y, int x) {
-        return lvl[y/32][x/32];
+        boolean isPositive = y >= 0 && x >= 0;
+        if (isPositive && y/32 < lvl.length && x/32 < lvl[y/32].length){
+            return lvl[y/32][x/32];
+        }
+        return 0;
     }
 
     @Override

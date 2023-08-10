@@ -10,7 +10,8 @@ import java.awt.image.BufferedImage;
 @Setter
 public class Enemy {
 
-    private static int id;
+    private static int idCounter;
+    private int id;
     private float x, y;
     private int health;
     private int type;
@@ -19,7 +20,8 @@ public class Enemy {
     private EnemyDirection direction = EnemyDirection.RIGHT;
 
     public Enemy(float x, float y, BufferedImage sprite, int type) {
-        id++;
+        idCounter++;
+        id = idCounter;
         this.x = x;
         this.y = y;
         this.sprite = sprite;
@@ -33,6 +35,9 @@ public class Enemy {
             case DOWN -> this.y+= speed;
             case UP -> this.y-= speed;
         }
+    }
 
+    public void changeDirection() {
+        this.setDirection(getDirection().next());
     }
 }
